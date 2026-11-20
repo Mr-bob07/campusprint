@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop Approvals &amp; License Verification – CampusPrint Admin</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../css/global.css" />
+  <link rel="stylesheet" href="../../css/components.css" />
+</head>
+<body class="page-wrapper" style="background-color: var(--color-bg-light);">
+
+  <!-- Navbar Placeholder -->
+  <div id="navbar-placeholder"></div>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="dashboard-layout">
+
+      <!-- Left Sidebar -->
+      <aside class="sidebar">
+        <div class="sidebar-logo">
+          <div style="font-weight: 700; color: var(--color-primary); font-size: 0.95rem;">🛡️ Platform Admin</div>
+          <div style="font-size: 0.75rem; color: var(--color-text-muted);">CampusPrint Central</div>
+        </div>
+        <div class="sidebar-section-label">Administration</div>
+        <a href="dashboard.html" class="sidebar-link"><span class="sidebar-link-icon">📊</span><span>Platform Overview</span></a>
+        <a href="shop-approval.html" class="sidebar-link active"><span class="sidebar-link-icon">🏪</span><span>Shop Approvals</span></a>
+        <a href="user-management.html" class="sidebar-link"><span class="sidebar-link-icon">👥</span><span>User Management</span></a>
+        <a href="order-monitoring.html" class="sidebar-link"><span class="sidebar-link-icon">📦</span><span>Order Monitoring</span></a>
+        <div class="sidebar-section-label" style="margin-top: 1.5rem;">Session</div>
+        <button class="sidebar-link" onclick="CampusPrint.auth.logout()" style="width:100%; text-align:left; background:none; border:none; cursor:pointer; color:var(--color-danger);"><span class="sidebar-link-icon">🚪</span><span>Logout</span></button>
+      </aside>
+
+      <!-- Right Content -->
+      <div class="dashboard-content">
+        <div class="dashboard-header">
+          <div>
+            <h1 style="font-size: 1.75rem; color: var(--color-primary); margin-bottom: 0.25rem;">Shop Verification &amp; Trade Licenses</h1>
+            <p>Admin verification portal • Review confidential legal credentials before approving shops for the live marketplace</p>
+          </div>
+        </div>
+
+        <div class="card card-padded mb-6">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom: 1.25rem; border-bottom: 1px solid var(--color-border); padding-bottom: 1rem;">
+            <div>
+              <span class="badge badge-warning" style="margin-bottom:6px;">Pending Verification</span>
+              <h2 style="font-size: 1.4rem; color: var(--color-primary); margin:0;">Modern Xerox &amp; Prints</h2>
+              <div style="font-size: 0.85rem; color: var(--color-text-muted); margin-top: 2px;">
+                Physical Location: <strong>Daffodil Smart City</strong> • Submitted 2 hours ago
+              </div>
+            </div>
+            <div style="display:flex; gap: 8px;">
+              <button class="btn btn-success" onclick="approveShop(this)">✓ Approve &amp; Publish</button>
+              <button class="btn btn-danger" onclick="rejectShop(this)">✕ Reject</button>
+            </div>
+          </div>
+
+          <!-- Confidential Credentials (Visible to Admin only) -->
+          <div class="grid-2 gap-6" style="background: #F8FAFC; padding: 1.25rem; border-radius: 12px; border: 1px solid var(--color-border);">
+            <div>
+              <h4 style="font-size:0.95rem; color:var(--color-primary); margin-bottom: 8px;">Legal Owner Credentials (Confidential)</h4>
+              <div style="font-size: 0.85rem; display:flex; flex-direction:column; gap: 6px;">
+                <div><strong>Owner Name:</strong> Md. Mominul Islam</div>
+                <div><strong>Owner Phone:</strong> 01822334455</div>
+                <div><strong>Owner Email:</strong> mominul.prints@gmail.com</div>
+                <div><strong>Owner NID:</strong> <span style="font-family:monospace; background:#E2E8F0; padding:2px 6px; border-radius:4px;">19942691234567890</span></div>
+              </div>
+            </div>
+
+            <div>
+              <h4 style="font-size:0.95rem; color:var(--color-primary); margin-bottom: 8px;">Trade License Verification</h4>
+              <div style="font-size: 0.85rem; display:flex; flex-direction:column; gap: 6px;">
+                <div><strong>License No:</strong> <span style="font-family:monospace; background:#E2E8F0; padding:2px 6px; border-radius:4px;">TRAD/SAVAR/2026/84912</span></div>
+                <div><strong>Issuing Authority:</strong> Savar Pourashabha</div>
+                <div style="margin-top: 8px;">
+                  <button class="btn btn-outline btn-sm" onclick="alert('Viewing verified Trade License PDF document (Page 1/1). Credentials match municipal records.')">
+                    📄 Inspect Trade License Document
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Approved Shops History -->
+        <div class="card card-padded">
+          <h3 style="font-size: 1.15rem; color: var(--color-primary); margin-bottom: 1rem;">Currently Active Marketplace Shops</h3>
+          <div class="table-wrapper">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Shop Name</th>
+                  <th>Location</th>
+                  <th>Owner</th>
+                  <th>Status</th>
+                  <th>Verification Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Smart Print Point</strong></td>
+                  <td>Daffodil Smart City</td>
+                  <td>Md. Rafiqul Islam</td>
+                  <td><span class="badge badge-success">Approved</span></td>
+                  <td>2026-10-12</td>
+                </tr>
+                <tr>
+                  <td><strong>Campus Xerox &amp; Digital Lab</strong></td>
+                  <td>Hall Area, DIU</td>
+                  <td>Kamrul Hasan</td>
+                  <td><span class="badge badge-success">Approved</span></td>
+                  <td>2026-10-18</td>
+                </tr>
+                <tr>
+                  <td><strong>Ashulia Quick Prints</strong></td>
+                  <td>Ashulia</td>
+                  <td>Tanvir Ahmed</td>
+                  <td><span class="badge badge-success">Approved</span></td>
+                  <td>2026-11-01</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer Placeholder -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Scripts -->
+  <script src="../../js/utils/auth.js"></script>
+  <script src="../../js/components/navbar.js?v=20261121_2"></script>
+  <script src="../../js/components/footer.js"></script>
+  <script>
+    function approveShop(btn) {
+      alert("✅ Shop 'Modern Xerox & Prints' approved successfully!\nStatus changed from 'Pending Verification' to 'Approved'. Shop is now live in the student marketplace.");
+      btn.closest('.card').remove();
+    }
+    function rejectShop(btn) {
+      const reason = prompt("Enter rejection reason for shop owner notification:", "Incomplete trade license document page 2 missing");
+      if (reason) {
+        alert("Shop application rejected. Notification sent to shop owner.");
+        btn.closest('.card').remove();
+      }
+    }
+  </script>
+</body>
+</html>

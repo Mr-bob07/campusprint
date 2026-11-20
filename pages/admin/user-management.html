@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Management – CampusPrint Admin</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../css/global.css" />
+  <link rel="stylesheet" href="../../css/components.css" />
+</head>
+<body class="page-wrapper" style="background-color: var(--color-bg-light);">
+
+  <!-- Navbar Placeholder -->
+  <div id="navbar-placeholder"></div>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="dashboard-layout">
+
+      <!-- Left Sidebar -->
+      <aside class="sidebar">
+        <div class="sidebar-logo">
+          <div style="font-weight: 700; color: var(--color-primary); font-size: 0.95rem;">🛡️ Platform Admin</div>
+          <div style="font-size: 0.75rem; color: var(--color-text-muted);">CampusPrint Central</div>
+        </div>
+        <div class="sidebar-section-label">Administration</div>
+        <a href="dashboard.html" class="sidebar-link"><span class="sidebar-link-icon">📊</span><span>Platform Overview</span></a>
+        <a href="shop-approval.html" class="sidebar-link"><span class="sidebar-link-icon">🏪</span><span>Shop Approvals</span></a>
+        <a href="user-management.html" class="sidebar-link active"><span class="sidebar-link-icon">👥</span><span>User Management</span></a>
+        <a href="order-monitoring.html" class="sidebar-link"><span class="sidebar-link-icon">📦</span><span>Order Monitoring</span></a>
+        <div class="sidebar-section-label" style="margin-top: 1.5rem;">Session</div>
+        <button class="sidebar-link" onclick="CampusPrint.auth.logout()" style="width:100%; text-align:left; background:none; border:none; cursor:pointer; color:var(--color-danger);"><span class="sidebar-link-icon">🚪</span><span>Logout</span></button>
+      </aside>
+
+      <!-- Right Content -->
+      <div class="dashboard-content">
+        <div class="dashboard-header">
+          <div>
+            <h1 style="font-size: 1.75rem; color: var(--color-primary); margin-bottom: 0.25rem;">Platform User Directory</h1>
+            <p>Admin control for university students and registered print shop owners</p>
+          </div>
+        </div>
+
+        <div class="card card-padded">
+          <div class="table-wrapper">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>User ID</th>
+                  <th>Name</th>
+                  <th>Role</th>
+                  <th>Institute / Shop</th>
+                  <th>Contact</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>#USR-101</td>
+                  <td><strong>Tanzim Ahmed</strong></td>
+                  <td><span class="badge badge-primary">Student</span></td>
+                  <td>Daffodil Int. University (CSE)</td>
+                  <td>01712345678</td>
+                  <td><span class="badge badge-success">Active</span></td>
+                  <td><button class="btn btn-outline btn-sm" onclick="alert('Viewing student details')">View</button></td>
+                </tr>
+                <tr>
+                  <td>#USR-201</td>
+                  <td><strong>Md. Rafiqul Islam</strong></td>
+                  <td><span class="badge badge-accent">Shop Owner</span></td>
+                  <td>Smart Print Point</td>
+                  <td>01711223344</td>
+                  <td><span class="badge badge-success">Active</span></td>
+                  <td><button class="btn btn-outline btn-sm" onclick="alert('Viewing vendor details')">View</button></td>
+                </tr>
+                <tr>
+                  <td>#USR-202</td>
+                  <td><strong>Kamrul Hasan</strong></td>
+                  <td><span class="badge badge-accent">Shop Owner</span></td>
+                  <td>Campus Xerox &amp; Digital Lab</td>
+                  <td>01819887766</td>
+                  <td><span class="badge badge-success">Active</span></td>
+                  <td><button class="btn btn-outline btn-sm" onclick="alert('Viewing vendor details')">View</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer Placeholder -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Scripts -->
+  <script src="../../js/utils/auth.js"></script>
+  <script src="../../js/components/navbar.js?v=20261121_2"></script>
+  <script src="../../js/components/footer.js"></script>
+</body>
+</html>

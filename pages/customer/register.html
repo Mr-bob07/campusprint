@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Registration – CampusPrint</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../css/global.css" />
+  <link rel="stylesheet" href="../../css/components.css" />
+</head>
+<body class="page-wrapper" style="background-color: var(--color-bg-light);">
+
+  <!-- Navbar Placeholder -->
+  <div id="navbar-placeholder"></div>
+
+  <!-- Main Content -->
+  <main class="main-content" style="padding: 3rem 1rem;">
+    <div style="width: 100%; max-width: 640px; margin: 0 auto;">
+
+      <div class="form-card">
+        <div style="text-align: center; margin-bottom: 2rem;">
+          <div style="width:52px; height:52px; border-radius:14px; background:linear-gradient(135deg,#1E3A8A,#0284C7); display:flex; align-items:center; justify-content:center; color:white; font-size:24px; margin: 0 auto 1rem;">
+            📝
+          </div>
+          <h1 style="font-size: 1.75rem; color: var(--color-primary); margin-bottom: 0.35rem;">Student Registration</h1>
+          <p style="font-size: 0.875rem; color: var(--color-text-secondary);">Create your CampusPrint account to order and earn loyalty discounts</p>
+        </div>
+
+        <form onsubmit="handleCustomerRegister(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Full Name <span class="required">*</span></label>
+              <div class="input-group">
+                <span class="input-icon">👤</span>
+                <input type="text" name="full_name" id="regName" class="form-input" required placeholder="e.g. Tanzim Ahmed" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Phone Number <span class="required">*</span></label>
+              <div class="input-group">
+                <span class="input-icon">📞</span>
+                <input type="tel" name="phone" id="regPhone" class="form-input" required placeholder="01XXXXXXXXX" />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Email Address <span class="required">*</span></label>
+            <div class="input-group">
+              <span class="input-icon">✉️</span>
+              <input type="email" name="email" id="regEmail" class="form-input" required placeholder="student@diu.edu.bd" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">University Name <span class="required">*</span></label>
+              <select name="university_name" class="form-select" required>
+                <option value="Daffodil International University (DIU)">Daffodil International University (DIU)</option>
+                <option value="Jahangirnagar University (JU)">Jahangirnagar University (JU)</option>
+                <option value="City University">City University</option>
+                <option value="Other">Other Institute</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Department <span class="required">*</span></label>
+              <input type="text" name="department" class="form-input" required placeholder="e.g. CSE / BBA / EEE / SWE" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Hostel / Campus Delivery Address <span class="required">*</span></label>
+            <input type="text" name="address" class="form-input" required placeholder="e.g. Yunus Khan Scholar Garden / DSC Hall 2, Room 402" />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Password <span class="required">*</span></label>
+              <div class="input-group">
+                <span class="input-icon">🔒</span>
+                <input type="password" name="password" id="regPass" class="form-input" required placeholder="Min. 6 characters" minlength="6" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Confirm Password <span class="required">*</span></label>
+              <div class="input-group">
+                <span class="input-icon">🔒</span>
+                <input type="password" name="confirm_password" id="regConfirmPass" class="form-input" required placeholder="Re-type password" />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-check">
+              <input type="checkbox" required checked />
+              <span class="form-check-label">
+                I agree to the <a href="../faq.html">Terms of Service</a> & <a href="../about.html">Privacy Policy</a>
+              </span>
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-full btn-lg mb-4">
+            Complete Student Registration
+          </button>
+        </form>
+
+        <div style="text-align: center; font-size: 0.875rem; color: var(--color-text-secondary); border-top: 1px solid var(--color-border); padding-top: 1.25rem;">
+          Already have an account? <a href="login.html" style="font-weight: 600; color: var(--color-primary);">Login here</a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer Placeholder -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Scripts -->
+  <script src="../../js/utils/auth.js"></script>
+  <script src="../../js/components/navbar.js?v=20261121_2"></script>
+  <script src="../../js/components/footer.js"></script>
+  <script>
+    function handleCustomerRegister(e) {
+      e.preventDefault();
+      const p1 = document.getElementById('regPass').value;
+      const p2 = document.getElementById('regConfirmPass').value;
+      if (p1 !== p2) {
+        alert("Passwords do not match!");
+        return;
+      }
+
+      const name = document.getElementById('regName').value;
+      const email = document.getElementById('regEmail').value;
+
+      CampusPrint.auth.setSession({
+        id: 102,
+        name: name,
+        email: email,
+        role: "customer"
+      });
+
+      CampusPrint.toast.success("Account Created!", "Welcome to CampusPrint! Redirecting to dashboard...");
+      setTimeout(() => {
+        window.location.href = "dashboard.html";
+      }, 700);
+    }
+  </script>
+</body>
+</html>

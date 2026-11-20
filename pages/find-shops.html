@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Find Printing Shops – CampusPrint</title>
+  <meta name="description" content="Browse and compare printing shops near DIU and Ashulia area. Filter by location, price, rating, and services." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/global.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/shops.css" />
+</head>
+<body class="page-wrapper">
+
+  <!-- Navbar Placeholder -->
+  <div id="navbar-placeholder"></div>
+
+  <!-- Main Content -->
+  <main class="main-content">
+
+    <!-- Page Header Banner -->
+    <section class="page-header">
+      <div class="container">
+        <h1>🔍 Find Printing Shops</h1>
+        <p>Explore verified printing shops in the DIU–Ashulia area, compare their individual rates, and order online.</p>
+      </div>
+    </section>
+
+    <div class="container">
+      <div class="shops-layout">
+
+        <!-- Left Filter Sidebar -->
+        <aside class="filter-sidebar">
+          <div class="filter-sidebar-header">
+            <span class="filter-sidebar-title">Filters</span>
+            <button class="filter-reset-btn" onclick="resetFilters()">Clear All</button>
+          </div>
+
+          <!-- Location Filter (Strict ID matching) -->
+          <div class="filter-group">
+            <div class="filter-group-title">
+              <span>📍 Your Location / Area</span>
+            </div>
+            <select id="filterLocation" class="form-select" onchange="applyFilters()">
+              <option value="">All Locations</option>
+              <!-- Populated dynamically from CP_LOCATIONS -->
+            </select>
+            <div class="form-hint" style="font-size: 11px; margin-top: 4px;">
+              Shows shops delivering to or located in this area.
+            </div>
+          </div>
+
+          <!-- Availability -->
+          <div class="filter-group">
+            <div class="filter-group-title">
+              <span>⚡ Status</span>
+            </div>
+            <label class="form-check mb-2">
+              <input type="checkbox" id="filterOpenNow" onchange="applyFilters()" />
+              <span class="form-check-label">Open Now Only</span>
+            </label>
+          </div>
+
+          <!-- Services Available -->
+          <div class="filter-group">
+            <div class="filter-group-title">
+              <span>🛠️ Available Services</span>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:8px;">
+              <label class="form-check">
+                <input type="checkbox" class="service-checkbox" value="Color Print" onchange="applyFilters()" />
+                <span class="form-check-label">Color Printing</span>
+              </label>
+              <label class="form-check">
+                <input type="checkbox" class="service-checkbox" value="Spiral Binding" onchange="applyFilters()" />
+                <span class="form-check-label">Spiral Binding</span>
+              </label>
+              <label class="form-check">
+                <input type="checkbox" class="service-checkbox" value="Hardcover Thesis" onchange="applyFilters()" />
+                <span class="form-check-label">Hardcover Thesis</span>
+              </label>
+              <label class="form-check">
+                <input type="checkbox" class="service-checkbox" value="Lamination" onchange="applyFilters()" />
+                <span class="form-check-label">Lamination</span>
+              </label>
+              <label class="form-check">
+                <input type="checkbox" class="service-checkbox" value="A3 Drawing" onchange="applyFilters()" />
+                <span class="form-check-label">A3 Engineering Print</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Rating -->
+          <div class="filter-group">
+            <div class="filter-group-title">
+              <span>⭐ Minimum Rating</span>
+            </div>
+            <select id="filterRating" class="form-select" onchange="applyFilters()">
+              <option value="0">Any Rating</option>
+              <option value="4.5">4.5 Stars & above</option>
+              <option value="4.7">4.7 Stars & above</option>
+            </select>
+          </div>
+        </aside>
+
+        <!-- Right Shops List -->
+        <section class="shops-content">
+          <!-- Top Sort & Search Toolbar -->
+          <div class="shops-top-bar">
+            <div class="shops-count">
+              Showing <strong id="shopCount">0</strong> printing shops
+            </div>
+
+            <div style="display: flex; gap: 1rem; align-items: center; flex: 1; max-width: 500px; justify-content: flex-end;">
+              <div class="input-group" style="flex: 1;">
+                <span class="input-icon">🔍</span>
+                <input type="text" id="shopSearchInput" class="form-input" placeholder="Search by shop name..." oninput="applyFilters()" />
+              </div>
+
+              <div class="sort-wrapper">
+                <label for="sortBy">Sort:</label>
+                <select id="sortBy" class="form-select" style="width: auto; padding: 8px 30px 8px 12px;" onchange="applyFilters()">
+                  <option value="recommended">Recommended</option>
+                  <option value="price_asc">Lowest B&W Price</option>
+                  <option value="rating_desc">Highest Rated</option>
+                  <option value="speed">Fastest Service</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Active Location Pill Notice -->
+          <div id="activeLocationNotice" style="display:none; margin-bottom: 1.5rem;" class="alert alert-info">
+            <span class="alert-icon">📍</span>
+            <div>Filtering shops delivering to or located in: <strong id="activeLocationText"></strong></div>
+          </div>
+
+          <!-- Shops Cards Grid -->
+          <div class="shops-grid" id="shopsGridContainer" style="grid-template-columns: repeat(2, 1fr);">
+            <!-- Populated dynamically by find-shops.js -->
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer Placeholder -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Scripts -->
+  <script src="../js/data/locations.js"></script>
+  <script src="../js/data/shops.js"></script>
+  <script src="../js/components/navbar.js?v=20261121_2"></script>
+  <script src="../js/components/footer.js"></script>
+  <script src="../js/find-shops.js"></script>
+</body>
+</html>

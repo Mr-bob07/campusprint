@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop Owner Registration (Step 1 of 2) – CampusPrint</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../css/global.css" />
+  <link rel="stylesheet" href="../../css/components.css" />
+</head>
+<body class="page-wrapper" style="background-color: var(--color-bg-light);">
+
+  <!-- Navbar Placeholder -->
+  <div id="navbar-placeholder"></div>
+
+  <!-- Main Content -->
+  <main class="main-content" style="padding: 3rem 1rem;">
+    <div style="width: 100%; max-width: 640px; margin: 0 auto;">
+
+      <!-- Step Indicator -->
+      <div class="step-indicator" style="margin-bottom: 2rem;">
+        <div class="step active">
+          <div class="step-number">1</div>
+          <div class="step-label">Owner Account</div>
+        </div>
+        <div class="step-line"></div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <div class="step-label">Shop &amp; Trade License</div>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <div style="text-align: center; margin-bottom: 2rem;">
+          <h1 style="font-size: 1.6rem; color: var(--color-primary); margin-bottom: 0.35rem;">Step 1: Owner Profile</h1>
+          <p style="font-size: 0.875rem; color: var(--color-text-secondary);">Enter the legal owner's credentials to begin registering your printing shop</p>
+        </div>
+
+        <form onsubmit="handleStep1Submit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Owner Full Name <span class="required">*</span></label>
+              <div class="input-group">
+                <span class="input-icon">👤</span>
+                <input type="text" name="owner_name" id="ownerName" class="form-input" required placeholder="e.g. Md. Rafiqul Islam" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Personal Phone Number <span class="required">*</span></label>
+              <div class="input-group">
+                <span class="input-icon">📞</span>
+                <input type="tel" name="phone" id="ownerPhone" class="form-input" required placeholder="01XXXXXXXXX" />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Email Address <span class="required">*</span></label>
+            <div class="input-group">
+              <span class="input-icon">✉️</span>
+              <input type="email" name="email" id="ownerEmail" class="form-input" required placeholder="owner@gmail.com" />
+            </div>
+          </div>
+
+          <!-- Confidential NID field -->
+          <div class="form-group">
+            <label class="form-label">
+              National ID (NID) Number <span class="required">*</span>
+              <span class="badge badge-warning" style="margin-left: 8px; font-size:10px;">🔒 Confidential</span>
+            </label>
+            <div class="input-group">
+              <span class="input-icon">🪪</span>
+              <input type="text" name="nid_number" class="form-input" required placeholder="10 or 17 digit NID number" />
+            </div>
+            <div class="form-hint">Your NID is strictly used for internal verification and will NEVER be publicly displayed.</div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Password <span class="required">*</span></label>
+              <div class="input-group">
+                <span class="input-icon">🔒</span>
+                <input type="password" name="password" id="ownerPass" class="form-input" required placeholder="Min 6 characters" minlength="6" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Confirm Password <span class="required">*</span></label>
+              <div class="input-group">
+                <span class="input-icon">🔒</span>
+                <input type="password" name="confirm_password" id="ownerConfirmPass" class="form-input" required placeholder="Re-type password" />
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-full btn-lg mb-4">
+            Proceed to Step 2: Shop Details →
+          </button>
+        </form>
+
+        <div style="text-align: center; font-size: 0.875rem; color: var(--color-text-secondary); border-top: 1px solid var(--color-border); padding-top: 1.25rem;">
+          Already have an account? <a href="login.html" style="font-weight: 600; color: var(--color-primary);">Login here</a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer Placeholder -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Scripts -->
+  <script src="../../js/components/navbar.js?v=20261121_2"></script>
+  <script src="../../js/components/footer.js"></script>
+  <script>
+    function handleStep1Submit(e) {
+      e.preventDefault();
+      const p1 = document.getElementById('ownerPass').value;
+      const p2 = document.getElementById('ownerConfirmPass').value;
+      if (p1 !== p2) {
+        alert("Passwords do not match!");
+        return;
+      }
+
+      // Store temp owner data for step 2
+      const ownerName = document.getElementById('ownerName').value;
+      const ownerEmail = document.getElementById('ownerEmail').value;
+      sessionStorage.setItem('cp_temp_owner_name', ownerName);
+      sessionStorage.setItem('cp_temp_owner_email', ownerEmail);
+
+      window.location.href = "shop-register.html";
+    }
+  </script>
+</body>
+</html>

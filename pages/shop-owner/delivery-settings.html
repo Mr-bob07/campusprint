@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Delivery Coverage &amp; Charges – CampusPrint</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../css/global.css" />
+  <link rel="stylesheet" href="../../css/components.css" />
+  <link rel="stylesheet" href="../../css/dashboard-owner.css" />
+</head>
+<body class="page-wrapper" style="background-color: var(--color-bg-light);">
+
+  <!-- Navbar Placeholder -->
+  <div id="navbar-placeholder"></div>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="dashboard-layout">
+
+      <!-- Left Sidebar -->
+      <aside class="sidebar">
+        <div class="sidebar-logo">
+          <div style="font-weight: 700; color: var(--color-primary); font-size: 0.95rem;">Smart Print Point</div>
+          <div style="font-size: 0.75rem; color: #10B981; font-weight: 600;">● Verified Partner Shop</div>
+        </div>
+        <div class="sidebar-section-label">Management</div>
+        <a href="dashboard.html" class="sidebar-link"><span class="sidebar-link-icon">📊</span><span>Dashboard Overview</span></a>
+        <a href="manage-orders.html" class="sidebar-link"><span class="sidebar-link-icon">📋</span><span>Customer Orders</span></a>
+        <a href="manage-services.html" class="sidebar-link"><span class="sidebar-link-icon">🏷️</span><span>Pricing &amp; Services</span></a>
+        <a href="delivery-settings.html" class="sidebar-link active"><span class="sidebar-link-icon">🚚</span><span>Delivery Coverage</span></a>
+        <a href="sales-analytics.html" class="sidebar-link"><span class="sidebar-link-icon">📈</span><span>Sales &amp; Analytics</span></a>
+        <a href="manage-loyalty.html" class="sidebar-link"><span class="sidebar-link-icon">🎁</span><span>Loyalty Rewards</span></a>
+        <a href="manage-discounts.html" class="sidebar-link"><span class="sidebar-link-icon">🏷️</span><span>Discount Coupons</span></a>
+        <div class="sidebar-section-label" style="margin-top: 1.5rem;">Shop Settings</div>
+        <a href="shop-profile.html" class="sidebar-link"><span class="sidebar-link-icon">🏪</span><span>Shop Profile &amp; Hours</span></a>
+        <button class="sidebar-link" onclick="CampusPrint.auth.logout()" style="width:100%; text-align:left; background:none; border:none; cursor:pointer; color:var(--color-danger);"><span class="sidebar-link-icon">🚪</span><span>Logout</span></button>
+      </aside>
+
+      <!-- Right Content -->
+      <div class="dashboard-content" style="max-width: 800px;">
+        <div class="dashboard-header">
+          <div>
+            <h1 style="font-size: 1.75rem; color: var(--color-primary); margin-bottom: 0.25rem;">Delivery Areas &amp; Rates</h1>
+            <p>Define which predefined campus locations your staff can deliver to, and set your own delivery charges</p>
+          </div>
+        </div>
+
+        <div class="card card-padded mb-6">
+          <div class="alert alert-info mb-6">
+            <span class="alert-icon">ℹ️</span>
+            <div>
+              <strong>Rule:</strong> In addition to Home Delivery, all shops automatically support <strong>Self Pickup</strong> with <strong>৳0</strong> delivery fee.
+            </div>
+          </div>
+
+          <form onsubmit="event.preventDefault(); CampusPrint.toast.success('Delivery Settings Updated!', 'Your new delivery rates have been saved.');">
+            <div style="display:flex; flex-direction:column; gap: 1rem; margin-bottom: 2rem;">
+
+              <div style="display:flex; justify-content:space-between; align-items:center; padding: 12px 16px; background: white; border: 1.5px solid var(--color-border); border-radius: 10px;">
+                <label class="form-check" style="margin:0;">
+                  <input type="checkbox" checked />
+                  <span class="form-check-label"><strong>Daffodil Smart City (DSC)</strong></span>
+                </label>
+                <div style="display:flex; align-items:center; gap: 8px;">
+                  <span>Charge: ৳</span>
+                  <input type="number" class="form-input" value="20" style="width: 80px; text-align:center; padding:6px 8px;" />
+                </div>
+              </div>
+
+              <div style="display:flex; justify-content:space-between; align-items:center; padding: 12px 16px; background: white; border: 1.5px solid var(--color-border); border-radius: 10px;">
+                <label class="form-check" style="margin:0;">
+                  <input type="checkbox" checked />
+                  <span class="form-check-label"><strong>Ashulia Main Area</strong></span>
+                </label>
+                <div style="display:flex; align-items:center; gap: 8px;">
+                  <span>Charge: ৳</span>
+                  <input type="number" class="form-input" value="30" style="width: 80px; text-align:center; padding:6px 8px;" />
+                </div>
+              </div>
+
+              <div style="display:flex; justify-content:space-between; align-items:center; padding: 12px 16px; background: white; border: 1.5px solid var(--color-border); border-radius: 10px;">
+                <label class="form-check" style="margin:0;">
+                  <input type="checkbox" checked />
+                  <span class="form-check-label"><strong>DIU Hall Area</strong></span>
+                </label>
+                <div style="display:flex; align-items:center; gap: 8px;">
+                  <span>Charge: ৳</span>
+                  <input type="number" class="form-input" value="15" style="width: 80px; text-align:center; padding:6px 8px;" />
+                </div>
+              </div>
+
+              <div style="display:flex; justify-content:space-between; align-items:center; padding: 12px 16px; background: white; border: 1.5px solid var(--color-border); border-radius: 10px;">
+                <label class="form-check" style="margin:0;">
+                  <input type="checkbox" />
+                  <span class="form-check-label"><strong>Baipayl</strong></span>
+                </label>
+                <div style="display:flex; align-items:center; gap: 8px;">
+                  <span>Charge: ৳</span>
+                  <input type="number" class="form-input" value="40" style="width: 80px; text-align:center; padding:6px 8px;" />
+                </div>
+              </div>
+
+              <div style="display:flex; justify-content:space-between; align-items:center; padding: 12px 16px; background: white; border: 1.5px solid var(--color-border); border-radius: 10px;">
+                <label class="form-check" style="margin:0;">
+                  <input type="checkbox" />
+                  <span class="form-check-label"><strong>Savar Thana / Bazar</strong></span>
+                </label>
+                <div style="display:flex; align-items:center; gap: 8px;">
+                  <span>Charge: ৳</span>
+                  <input type="number" class="form-input" value="50" style="width: 80px; text-align:center; padding:6px 8px;" />
+                </div>
+              </div>
+
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg">Update Delivery Coverage</button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer Placeholder -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Scripts -->
+  <script src="../../js/utils/auth.js"></script>
+  <script src="../../js/components/navbar.js?v=20261121_2"></script>
+  <script src="../../js/components/footer.js"></script>
+</body>
+</html>

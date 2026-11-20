@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Place Print Order – CampusPrint</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../css/global.css" />
+  <link rel="stylesheet" href="../../css/components.css" />
+  <link rel="stylesheet" href="../../css/shops.css" />
+  <style>
+    .order-layout {
+      display: grid;
+      grid-template-columns: 1.8fr 1.2fr;
+      gap: 2rem;
+      margin: 2.5rem 0 4rem;
+    }
+    @media (max-width: 900px) {
+      .order-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body class="page-wrapper" style="background-color: var(--color-bg-light);">
+
+  <!-- Navbar Placeholder -->
+  <div id="navbar-placeholder"></div>
+
+  <!-- Main Content -->
+  <main class="main-content">
+
+    <section class="page-header" style="background: linear-gradient(135deg, #0F172A 0%, #1E3A8A 65%, #0284C7 100%); color: white; padding: 3rem 0 2.5rem;">
+      <div class="container">
+        <h1 style="color:white; font-size:2rem; margin-bottom: 0.35rem;">🖨️ Place Printing Order</h1>
+        <p style="color: rgba(255,255,255,0.85); font-size: 0.95rem;">
+          Configure your print specifications. Live price calculator uses individual shop rates in real-time.
+        </p>
+      </div>
+    </section>
+
+    <div class="container">
+      <div class="order-layout">
+
+        <!-- Left: Order Form -->
+        <div class="order-form-container">
+          <form id="orderForm" onsubmit="handlePlaceOrder(event)">
+
+            <!-- 1. Shop Selection -->
+            <div class="form-card mb-6">
+              <h3 style="font-size: 1.2rem; color: var(--color-primary); margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
+                <span>🏪</span> 1. Select Printing Shop
+              </h3>
+              <div class="form-group mb-0">
+                <label class="form-label">Chosen Printing Shop <span class="required">*</span></label>
+                <select id="selectedShopSelect" name="shop_id" class="form-select" onchange="onShopChange()" required>
+                  <!-- Populated from CP_SHOPS -->
+                </select>
+                <div class="form-hint" id="shopPricingNotice" style="margin-top:6px; font-weight:500; color:var(--color-primary);"></div>
+              </div>
+            </div>
+
+            <!-- 2. Document Upload -->
+            <div class="form-card mb-6">
+              <h3 style="font-size: 1.2rem; color: var(--color-primary); margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
+                <span>📄</span> 2. Document Upload
+              </h3>
+              <div class="form-group mb-0">
+                <div class="file-upload-area" onclick="document.getElementById('pdfInput').click()">
+                  <input type="file" id="pdfInput" name="document" accept=".pdf" style="display:none;" onchange="onFileSelected(this)" required />
+                  <div class="file-upload-icon">📑</div>
+                  <div class="file-upload-text" id="pdfStatusText"><strong>Click to select PDF document</strong> or drag and drop</div>
+                  <div class="file-upload-hint">PDF format only • Max 20MB</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. Print Specifications -->
+            <div class="form-card mb-6">
+              <h3 style="font-size: 1.2rem; color: var(--color-primary); margin-bottom: 1.25rem; display: flex; align-items: center; gap: 8px;">
+                <span>⚙️</span> 3. Print Specifications
+              </h3>
+
+              <!-- Print Type & Paper Size -->
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Print Color Type <span class="required">*</span></label>
+                  <select id="printType" name="print_type" class="form-select" onchange="calculateLivePrice()">
+                    <option value="bw">Black &amp; White (Monochrome)</option>
+                    <option value="color">Full Color</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Paper Size <span class="required">*</span></label>
+                  <select id="paperSize" name="paper_size" class="form-select" onchange="calculateLivePrice()">
+                    <option value="A4">A4 Standard (80gsm)</option>
+                    <option value="A3">A3 Large Format</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Print Sides -->
+              <div class="form-group">
+                <label class="form-label">Print Side Orientation <span class="required">*</span></label>
+                <div style="display:flex; gap: 1.5rem;">
+                  <label class="form-check">
+                    <input type="radio" name="print_side" value="single" checked onchange="calculateLivePrice()" />
+                    <span class="form-check-label">Single Sided</span>
+                  </label>
+                  <label class="form-check">
+                    <input type="radio" name="print_side" value="double" onchange="calculateLivePrice()" />
+                    <span class="form-check-label">Double Sided (Back-to-Back)</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Pages & Copies -->
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Number of Document Pages <span class="required">*</span></label>
+                  <input type="number" id="pageCount" name="pages" class="form-input" min="1" max="1000" value="10" oninput="calculateLivePrice()" required />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Number of Sets / Copies <span class="required">*</span></label>
+                  <input type="number" id="copyCount" name="copies" class="form-input" min="1" max="50" value="1" oninput="calculateLivePrice()" required />
+                </div>
+              </div>
+
+              <!-- Finishing & Binding -->
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Binding Option</label>
+                  <select id="bindingOption" name="binding" class="form-select" onchange="calculateLivePrice()">
+                    <option value="none">No Binding (Loose Sheets)</option>
+                    <option value="spiral">Spiral Binding</option>
+                    <option value="tape">Tape / Strip Binding</option>
+                    <option value="hardcover">Hardcover Thesis Book</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Lamination Option</label>
+                  <select id="laminationOption" name="lamination" class="form-select" onchange="calculateLivePrice()">
+                    <option value="none">No Lamination</option>
+                    <option value="lamination_a4">A4 Lamination</option>
+                    <option value="lamination_a3">A3 Lamination</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- 4. Delivery & Customer Contact -->
+            <div class="form-card mb-6">
+              <h3 style="font-size: 1.2rem; color: var(--color-primary); margin-bottom: 1.25rem; display: flex; align-items: center; gap: 8px;">
+                <span>🚚</span> 4. Delivery / Pickup Option
+              </h3>
+
+              <div class="form-group">
+                <label class="form-label">Fulfillment Method <span class="required">*</span></label>
+                <div style="display:flex; gap: 1.5rem; margin-bottom: 1rem;">
+                  <label class="form-check">
+                    <input type="radio" name="delivery_type" id="delivSelfPickup" value="self_pickup" checked onchange="onDeliveryTypeChange()" />
+                    <span class="form-check-label"><strong>Self Pickup</strong> (at shop) — <span style="color:#10B981; font-weight:700;">৳0 FREE</span></span>
+                  </label>
+                  <label class="form-check">
+                    <input type="radio" name="delivery_type" id="delivHome" value="home_delivery" onchange="onDeliveryTypeChange()" />
+                    <span class="form-check-label"><strong>Home / Hostel Delivery</strong></span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Home Delivery Area Dropdown (Visible only when home delivery is selected) -->
+              <div id="homeDeliveryAreaGroup" class="form-group" style="display:none; background:#EFF6FF; padding:1rem; border-radius:10px; border:1px solid #BFDBFE;">
+                <label class="form-label">Select Delivery Area <span class="required">*</span></label>
+                <select id="deliveryAreaSelect" name="delivery_area_id" class="form-select" onchange="calculateLivePrice()">
+                  <!-- Dynamically populated based on selected shop's delivery_areas -->
+                </select>
+                <div class="form-hint" id="deliveryChargeHint" style="margin-top:6px; font-weight:600; color:#1E40AF;"></div>
+
+                <div class="form-group" style="margin-top: 1rem; margin-bottom: 0;">
+                  <label class="form-label">Detailed Delivery Address <span class="required">*</span></label>
+                  <input type="text" id="deliveryAddress" name="delivery_address" class="form-input" placeholder="e.g. DSC Hall 3, Room 402, Ashulia" />
+                </div>
+              </div>
+
+              <!-- Contact Phone -->
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Student Contact Phone <span class="required">*</span></label>
+                  <input type="tel" name="phone" id="customerPhone" class="form-input" required placeholder="01XXXXXXXXX" value="01712345678" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Preferred Pickup / Delivery Time</label>
+                  <input type="text" name="preferred_time" class="form-input" placeholder="e.g. Today by 4:00 PM" value="Today by 4:00 PM" />
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Submit Button (Mobile) -->
+            <button type="submit" class="btn btn-primary btn-full btn-xl mb-4">
+              Confirm &amp; Place Order (COD)
+            </button>
+          </form>
+        </div>
+
+        <!-- Right: Sticky Live Price Calculator -->
+        <div class="order-summary-sidebar">
+          <div class="price-calculator">
+            <div class="price-calculator-title">
+              <span>🧮</span> Live Price Calculator
+            </div>
+
+            <div style="font-size: 0.8rem; color: var(--color-text-muted); margin-bottom: 1rem;">
+              Shop: <strong id="summaryShopName" style="color:var(--color-primary);">Smart Print Point</strong>
+            </div>
+
+            <div class="price-line">
+              <span id="summaryPrintingDesc">B&amp;W A4 (10 pgs × 1 copy)</span>
+              <span class="amount" id="summaryPrintingCost">৳15.00</span>
+            </div>
+
+            <div class="price-line" id="summaryBindingLine" style="display:none;">
+              <span id="summaryBindingDesc">Binding</span>
+              <span class="amount" id="summaryBindingCost">৳0.00</span>
+            </div>
+
+            <div class="price-line" id="summaryLaminationLine" style="display:none;">
+              <span id="summaryLaminationDesc">Lamination</span>
+              <span class="amount" id="summaryLaminationCost">৳0.00</span>
+            </div>
+
+            <div class="price-line">
+              <span id="summaryDeliveryDesc">Delivery Charge</span>
+              <span class="amount" id="summaryDeliveryCost">৳0.00</span>
+            </div>
+
+            <!-- Discount Line (Redeemable from loyalty points) -->
+            <div class="price-line" id="summaryDiscountLine" style="display:none;">
+              <span>Loyalty Discount</span>
+              <span class="amount discount-amount" id="summaryDiscountAmount">−৳0.00</span>
+            </div>
+
+            <!-- Total -->
+            <div class="price-line total">
+              <span>Total Payable</span>
+              <span class="amount" id="summaryTotalPayable">৳15.00</span>
+            </div>
+
+            <!-- COD Badge -->
+            <div style="margin-top: 1.25rem;">
+              <div class="cod-badge" style="width: 100%; justify-content: center;">
+                💵 Pay Cash on Delivery / Pickup
+              </div>
+            </div>
+
+            <!-- Points Earning Forecast -->
+            <div style="margin-top: 1rem; background: #F8FAFC; border: 1px solid var(--color-border); border-radius: 8px; padding: 10px; font-size: 0.8rem; text-align: center;">
+              🎁 You will earn <strong id="forecastPoints" style="color:var(--color-accent);">3 points</strong> after this order is completed &amp; paid!
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer Placeholder -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Scripts -->
+  <script src="../../js/data/locations.js"></script>
+  <script src="../../js/data/shops.js"></script>
+  <script src="../../js/data/orders.js"></script>
+  <script src="../../js/utils/auth.js"></script>
+  <script src="../../js/components/navbar.js?v=20261121_2"></script>
+  <script src="../../js/components/footer.js"></script>
+  <script src="../../js/place-order.js"></script>
+</body>
+</html>

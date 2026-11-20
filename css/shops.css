@@ -1,0 +1,235 @@
+/* ==========================================================================
+   CampusPrint – Shops & Details CSS (css/shops.css)
+   ========================================================================== */
+
+.page-header {
+  background: linear-gradient(135deg, #0F172A 0%, #1E3A8A 65%, #0284C7 100%);
+  color: white;
+  padding: 3.5rem 0 3rem;
+  margin-bottom: 2rem;
+}
+
+.page-header h1 {
+  color: white;
+  font-size: 2.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.page-header p {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.05rem;
+  max-width: 600px;
+}
+
+/* Find Shops Layout */
+.shops-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+/* Sidebar Filter */
+.filter-sidebar {
+  background: white;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: 1.5rem;
+  height: fit-content;
+  position: sticky;
+  top: calc(var(--navbar-height) + 1rem);
+}
+
+.filter-sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.filter-sidebar-title {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.filter-reset-btn {
+  font-size: 0.8rem;
+  color: var(--color-accent);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.filter-group {
+  margin-bottom: 1.5rem;
+}
+
+.filter-group:last-child {
+  margin-bottom: 0;
+}
+
+.filter-group-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Shops Listing Top Bar */
+.shops-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background: white;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.shops-count {
+  font-size: 0.95rem;
+  color: var(--color-text-secondary);
+}
+
+.shops-count strong {
+  color: var(--color-primary);
+}
+
+.sort-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sort-wrapper label {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+/* Shop Details Page */
+.shop-banner {
+  background: linear-gradient(135deg, #0F172A 0%, #1E3A8A 65%, #0284C7 100%);
+  color: white;
+  padding: 3.5rem 0 2.5rem;
+}
+
+.shop-banner-inner {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.shop-avatar-large {
+  width: 100px;
+  height: 100px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  flex-shrink: 0;
+}
+
+.shop-banner-info h1 {
+  color: white;
+  font-size: 2rem;
+  margin-bottom: 0.4rem;
+}
+
+.shop-banner-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.85);
+  margin-top: 0.5rem;
+}
+
+.shop-details-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  margin: 2.5rem 0 4rem;
+}
+
+.details-card {
+  background: white;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: 1.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.details-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 1.25rem;
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.price-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.price-table th, .price-table td {
+  padding: 0.75rem 0.5rem;
+  border-bottom: 1px solid var(--color-border-light);
+  font-size: 0.9rem;
+}
+
+.price-table th {
+  text-align: left;
+  color: var(--color-text-secondary);
+  font-weight: 600;
+}
+
+.price-table td.price {
+  text-align: right;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.delivery-tag-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.delivery-item-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 0.8rem;
+  background: var(--color-bg-light);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+}
+
+@media (max-width: 900px) {
+  .shops-layout {
+    grid-template-columns: 1fr;
+  }
+  .shop-details-grid {
+    grid-template-columns: 1fr;
+  }
+  .shop-banner-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

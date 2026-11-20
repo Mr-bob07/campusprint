@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop Profile Settings – CampusPrint</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../css/global.css" />
+  <link rel="stylesheet" href="../../css/components.css" />
+  <link rel="stylesheet" href="../../css/dashboard-owner.css" />
+</head>
+<body class="page-wrapper" style="background-color: var(--color-bg-light);">
+
+  <!-- Navbar Placeholder -->
+  <div id="navbar-placeholder"></div>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="dashboard-layout">
+
+      <!-- Left Sidebar -->
+      <aside class="sidebar">
+        <div class="sidebar-logo">
+          <div style="font-weight: 700; color: var(--color-primary); font-size: 0.95rem;">Smart Print Point</div>
+          <div style="font-size: 0.75rem; color: #10B981; font-weight: 600;">● Verified Partner Shop</div>
+        </div>
+        <div class="sidebar-section-label">Management</div>
+        <a href="dashboard.html" class="sidebar-link"><span class="sidebar-link-icon">📊</span><span>Dashboard Overview</span></a>
+        <a href="manage-orders.html" class="sidebar-link"><span class="sidebar-link-icon">📋</span><span>Customer Orders</span></a>
+        <a href="manage-services.html" class="sidebar-link"><span class="sidebar-link-icon">🏷️</span><span>Pricing &amp; Services</span></a>
+        <a href="delivery-settings.html" class="sidebar-link"><span class="sidebar-link-icon">🚚</span><span>Delivery Coverage</span></a>
+        <a href="sales-analytics.html" class="sidebar-link"><span class="sidebar-link-icon">📈</span><span>Sales &amp; Analytics</span></a>
+        <a href="manage-loyalty.html" class="sidebar-link"><span class="sidebar-link-icon">🎁</span><span>Loyalty Rewards</span></a>
+        <a href="manage-discounts.html" class="sidebar-link"><span class="sidebar-link-icon">🏷️</span><span>Discount Coupons</span></a>
+        <div class="sidebar-section-label" style="margin-top: 1.5rem;">Shop Settings</div>
+        <a href="shop-profile.html" class="sidebar-link active"><span class="sidebar-link-icon">🏪</span><span>Shop Profile &amp; Hours</span></a>
+        <button class="sidebar-link" onclick="CampusPrint.auth.logout()" style="width:100%; text-align:left; background:none; border:none; cursor:pointer; color:var(--color-danger);"><span class="sidebar-link-icon">🚪</span><span>Logout</span></button>
+      </aside>
+
+      <!-- Right Content -->
+      <div class="dashboard-content" style="max-width: 800px;">
+        <div class="dashboard-header">
+          <div>
+            <h1 style="font-size: 1.75rem; color: var(--color-primary); margin-bottom: 0.25rem;">Shop Profile &amp; Info</h1>
+            <p>Edit your shop commercial name, address, contact phone, and operating hours</p>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <form onsubmit="event.preventDefault(); CampusPrint.toast.success('Shop Profile Saved!', 'Changes updated.');">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Shop Commercial Name <span class="required">*</span></label>
+                <input type="text" class="form-input" value="Smart Print Point" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Shop Contact Phone <span class="required">*</span></label>
+                <input type="tel" class="form-input" value="01711223344" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Shop Tagline / Catchphrase</label>
+              <input type="text" class="form-input" value="Fastest thesis &amp; assignment printing inside campus" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Shop Full Address <span class="required">*</span></label>
+              <input type="text" class="form-input" value="Gate 1, Daffodil Smart City, Ashulia" required />
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Opening &amp; Closing Hours <span class="required">*</span></label>
+                <input type="text" class="form-input" value="8:00 AM - 10:00 PM" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Estimated Preparation Speed</label>
+                <input type="text" class="form-input" value="20-30 mins" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Shop Status</label>
+              <select class="form-select">
+                <option value="open" selected>🟢 Open for Orders</option>
+                <option value="busy">🟡 Busy (Longer prep time)</option>
+                <option value="closed">🔴 Closed Temporarily</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg">Save Shop Details</button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer Placeholder -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Scripts -->
+  <script src="../../js/utils/auth.js"></script>
+  <script src="../../js/components/navbar.js?v=20261121_2"></script>
+  <script src="../../js/components/footer.js"></script>
+</body>
+</html>

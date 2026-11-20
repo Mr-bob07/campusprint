@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Master Admin Dashboard – CampusPrint</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../css/global.css" />
+  <link rel="stylesheet" href="../../css/components.css" />
+  <link rel="stylesheet" href="../../css/dashboard-admin.css" />
+</head>
+<body class="page-wrapper" style="background-color: var(--color-bg-light);">
+
+  <!-- Navbar Placeholder -->
+  <div id="navbar-placeholder"></div>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="dashboard-layout">
+
+      <!-- Left Sidebar -->
+      <aside class="sidebar">
+        <div class="sidebar-logo">
+          <div style="font-weight: 700; color: var(--color-primary); font-size: 0.95rem;">🛡️ Platform Admin</div>
+          <div style="font-size: 0.75rem; color: var(--color-text-muted);">CampusPrint Central Hub</div>
+        </div>
+
+        <div class="sidebar-section-label">Administration</div>
+        <button class="sidebar-link active" onclick="switchAdminTab('overview', this)" style="width:100%; border:none; text-align:left; background:none; cursor:pointer;">
+          <span class="sidebar-link-icon">📊</span><span>Overview</span>
+        </button>
+        <button class="sidebar-link" onclick="switchAdminTab('approvals', this)" style="width:100%; border:none; text-align:left; background:none; cursor:pointer;">
+          <span class="sidebar-link-icon">🏪</span><span>Shop Approvals</span>
+          <span class="sidebar-link-badge" id="sidebarPendingBadge">1</span>
+        </button>
+        <button class="sidebar-link" onclick="switchAdminTab('customers', this)" style="width:100%; border:none; text-align:left; background:none; cursor:pointer;">
+          <span class="sidebar-link-icon">👥</span><span>Customer Management</span>
+        </button>
+        <button class="sidebar-link" onclick="switchAdminTab('shops', this)" style="width:100%; border:none; text-align:left; background:none; cursor:pointer;">
+          <span class="sidebar-link-icon">🏬</span><span>Shop Management</span>
+        </button>
+        <button class="sidebar-link" onclick="switchAdminTab('orders', this)" style="width:100%; border:none; text-align:left; background:none; cursor:pointer;">
+          <span class="sidebar-link-icon">📦</span><span>Order Monitoring</span>
+        </button>
+
+        <div class="sidebar-section-label" style="margin-top: 1.5rem;">Session</div>
+        <button class="sidebar-link" onclick="CampusPrint.auth.logout()" style="width:100%; text-align:left; background:none; border:none; cursor:pointer; color:var(--color-danger);">
+          <span class="sidebar-link-icon">🚪</span><span>Logout</span>
+        </button>
+      </aside>
+
+      <!-- Right Content -->
+      <div class="dashboard-content">
+
+        <!-- Header Greeting & Status -->
+        <div class="dashboard-header">
+          <div>
+            <h1 style="font-size: 1.75rem; color: var(--color-primary); margin-bottom: 0.25rem;">Administrator Control Center</h1>
+            <p>DIU–Ashulia Region • Manage customers, verified shops, licenses, approvals and platform orders</p>
+          </div>
+          <div style="display:flex; gap: 8px;">
+            <button class="btn btn-primary" onclick="switchAdminTab('approvals')">
+              Pending Approvals (<span id="btnPendingCount">1</span>)
+            </button>
+          </div>
+        </div>
+
+        <!-- ========================================================
+             THE 5 CORE STAT METRICS (Requested Features 1-5)
+        ======================================================== -->
+        <div class="admin-stats-grid">
+          <!-- 1. Total Customers -->
+          <div class="stat-card">
+            <div class="stat-card-icon blue">🎓</div>
+            <div class="stat-card-value" id="statCustomers">540</div>
+            <div class="stat-card-label">Total Customers</div>
+            <div class="stat-card-change up" style="font-size:11px;">Active Students</div>
+          </div>
+
+          <!-- 2. Total Shops -->
+          <div class="stat-card">
+            <div class="stat-card-icon purple">🏬</div>
+            <div class="stat-card-value" id="statTotalShops">6</div>
+            <div class="stat-card-label">Total Shops</div>
+            <div class="stat-card-change" style="font-size:11px; color:var(--color-text-muted);">Registered Vendors</div>
+          </div>
+
+          <!-- 3. Pending Shop Approvals -->
+          <div class="stat-card" style="border: 1.5px solid #F59E0B; background:#FFFBEB;">
+            <div class="stat-card-icon yellow">⏳</div>
+            <div class="stat-card-value" style="color:#D97706;" id="statPendingShops">1</div>
+            <div class="stat-card-label" style="font-weight:600; color:#B45309;">Pending Approvals</div>
+            <div style="font-size:11px; color:#B45309; margin-top:2px;">Needs verification</div>
+          </div>
+
+          <!-- 4. Approved Shops -->
+          <div class="stat-card">
+            <div class="stat-card-icon green">✅</div>
+            <div class="stat-card-value" style="color:var(--color-success);" id="statApprovedShops">5</div>
+            <div class="stat-card-label">Approved Shops</div>
+            <div class="stat-card-change up" style="font-size:11px;">Live in Marketplace</div>
+          </div>
+
+          <!-- 5. Total Platform Orders -->
+          <div class="stat-card">
+            <div class="stat-card-icon blue">📦</div>
+            <div class="stat-card-value" id="statTotalOrders">312</div>
+            <div class="stat-card-label">Total Platform Orders</div>
+            <div class="stat-card-change up" style="font-size:11px;">100% COD Mode</div>
+          </div>
+        </div>
+
+        <!-- ========================================================
+             NAVIGATION TABS
+        ======================================================== -->
+        <div class="admin-tabs">
+          <button class="admin-tab-btn active" id="tab-overview" onclick="switchAdminTab('overview', this)">
+            <span>📊</span> Overview Feed
+          </button>
+          <button class="admin-tab-btn" id="tab-approvals" onclick="switchAdminTab('approvals', this)">
+            <span>⏳</span> Shop Approval &amp; Verification (<span id="tabPendingBadge">1</span>)
+          </button>
+          <button class="admin-tab-btn" id="tab-customers" onclick="switchAdminTab('customers', this)">
+            <span>👥</span> Customer Management
+          </button>
+          <button class="admin-tab-btn" id="tab-shops" onclick="switchAdminTab('shops', this)">
+            <span>🏬</span> Shop Management
+          </button>
+          <button class="admin-tab-btn" id="tab-orders" onclick="switchAdminTab('orders', this)">
+            <span>📦</span> Order Monitoring
+          </button>
+        </div>
+
+        <!-- ========================================================
+             TAB 1: OVERVIEW FEED
+        ======================================================== -->
+        <div class="admin-tab-pane active" id="pane-overview">
+          <div class="card card-padded mb-6" style="border-left: 4px solid #F59E0B;" id="overviewPendingAlert">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap: 10px;">
+              <div>
+                <span class="badge badge-warning">Action Required</span>
+                <h3 style="font-size: 1.2rem; color: var(--color-primary); margin: 6px 0 2px;">
+                  1 New Shop Awaiting Trade License Verification
+                </h3>
+                <p style="font-size: 0.85rem; color: var(--color-text-secondary); margin:0;">
+                  "Modern Xerox &amp; Prints" submitted trade license credentials and is awaiting Admin approval.
+                </p>
+              </div>
+              <button class="btn btn-accent btn-sm" onclick="switchAdminTab('approvals')">Inspect License &amp; Verify →</button>
+            </div>
+          </div>
+
+          <div class="card card-padded">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 1rem;">
+              <h3 style="font-size: 1.15rem; color: var(--color-primary); margin:0;">Recent Platform Order Feed</h3>
+              <button class="btn btn-outline btn-sm" onclick="switchAdminTab('orders')">View All Orders</button>
+            </div>
+            <div class="table-wrapper">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Order ID</th>
+                    <th>Student</th>
+                    <th>Printing Vendor</th>
+                    <th>Amount</th>
+                    <th>Fulfillment</th>
+                    <th>Payment (COD)</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="overviewOrdersBody">
+                  <!-- Injected by script -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ========================================================
+             TAB 2: SHOP APPROVAL & TRADE LICENSE VERIFICATION
+             (Requested Features 8 & 9)
+        ======================================================== -->
+        <div class="admin-tab-pane" id="pane-approvals">
+          <div class="card card-padded mb-6" id="pendingShopCard">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap: 12px; margin-bottom: 1.25rem; border-bottom: 1px solid var(--color-border); padding-bottom: 1rem;">
+              <div>
+                <span class="status-badge status-pending">PENDING VERIFICATION</span>
+                <h2 style="font-size: 1.4rem; color: var(--color-primary); margin: 6px 0 2px;">Modern Xerox &amp; Prints</h2>
+                <div style="font-size: 0.85rem; color: var(--color-text-muted);">
+                  📍 Physical Location: <strong>Daffodil Smart City (Gate 2)</strong> • Submitted: <strong>Today, 02:15 PM</strong>
+                </div>
+              </div>
+              <div style="display:flex; gap: 8px;">
+                <button class="btn btn-success" onclick="adminApproveShop('Modern Xerox & Prints')">
+                  ✓ Approve &amp; Publish Shop
+                </button>
+                <button class="btn btn-danger" onclick="adminRejectShop('Modern Xerox & Prints')">
+                  ✕ Reject Application
+                </button>
+              </div>
+            </div>
+
+            <!-- Confidential Credentials Box (Visible ONLY to Platform Admin) -->
+            <div class="confidential-card">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 10px;">
+                <strong style="color:#92400E; font-size: 0.95rem;">🔒 Confidential Credentials Inspection</strong>
+                <span class="badge badge-warning">Admin Access Only</span>
+              </div>
+
+              <div class="grid-2 gap-6" style="font-size: 0.875rem;">
+                <div>
+                  <div style="margin-bottom: 6px;"><strong>Legal Owner:</strong> Md. Mominul Islam</div>
+                  <div style="margin-bottom: 6px;"><strong>Owner Phone:</strong> 01822334455</div>
+                  <div style="margin-bottom: 6px;"><strong>Owner Email:</strong> mominul.prints@gmail.com</div>
+                  <div>
+                    <strong>Owner NID:</strong> 
+                    <span style="font-family:monospace; background:#FDE68A; padding:2px 6px; border-radius:4px; font-weight:700;">19942691234567890</span>
+                    <span style="font-size:11px; color:#78350F; margin-left:4px;">(Protected)</span>
+                  </div>
+                </div>
+
+                <div>
+                  <div style="margin-bottom: 6px;">
+                    <strong>Trade License No:</strong> 
+                    <span style="font-family:monospace; background:#FDE68A; padding:2px 6px; border-radius:4px; font-weight:700;">TRAD/SAVAR/2026/84912</span>
+                  </div>
+                  <div style="margin-bottom: 8px;"><strong>Issuing Pourashabha:</strong> Savar Pourashabha, Dhaka</div>
+                  <div>
+                    <button class="btn btn-outline btn-sm" onclick="previewTradeLicenseModal()">
+                      📄 Open &amp; Inspect Trade License Document
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="noPendingNotice" style="display:none;" class="card card-padded text-center">
+            <div style="font-size: 3rem; margin-bottom: 0.5rem;">🎉</div>
+            <h3 style="color:var(--color-primary);">All Shops are Verified!</h3>
+            <p style="color:var(--color-text-muted);">No new shop applications are currently pending admin review.</p>
+          </div>
+        </div>
+
+        <!-- ========================================================
+             TAB 3: CUSTOMER MANAGEMENT (Requested Feature 6)
+        ======================================================== -->
+        <div class="admin-tab-pane" id="pane-customers">
+          <div class="card card-padded">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap: 12px; margin-bottom: 1.25rem;">
+              <h3 style="font-size: 1.2rem; color: var(--color-primary); margin:0;">Student &amp; Customer Accounts</h3>
+              <div class="input-group" style="max-width: 300px;">
+                <span class="input-icon">🔍</span>
+                <input type="text" id="customerSearch" class="form-input" placeholder="Search students..." oninput="filterCustomerTable()" />
+              </div>
+            </div>
+
+            <div class="table-wrapper">
+              <table class="table" id="customerTable">
+                <thead>
+                  <tr>
+                    <th>User ID</th>
+                    <th>Student Name</th>
+                    <th>University &amp; Dept</th>
+                    <th>Phone &amp; Email</th>
+                    <th>Hostel Address</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>#USR-101</strong></td>
+                    <td><strong>Tanzim Ahmed</strong></td>
+                    <td>DIU • CSE (Batch 48)</td>
+                    <td>01712345678<br><span style="font-size:11px; color:var(--color-text-muted);">student@diu.edu.bd</span></td>
+                    <td>DSC Hall 3, Room 402, Ashulia</td>
+                    <td><span class="badge badge-success">Active</span></td>
+                    <td>
+                      <button class="btn btn-outline btn-sm" onclick="alert('Student: Tanzim Ahmed\nOrders placed: 3\nTotal spent: ৳351.00\nLoyalty Points: 3,750 pts')">Details</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>#USR-102</strong></td>
+                    <td><strong>Fatema Khanam</strong></td>
+                    <td>DIU • BBA (Batch 50)</td>
+                    <td>01811223344<br><span style="font-size:11px; color:var(--color-text-muted);">fatema.bba@diu.edu.bd</span></td>
+                    <td>Scholar Garden 1, DIU</td>
+                    <td><span class="badge badge-success">Active</span></td>
+                    <td>
+                      <button class="btn btn-outline btn-sm" onclick="alert('Student: Fatema Khanam\nOrders placed: 5\nTotal spent: ৳420.00\nLoyalty Points: 1,800 pts')">Details</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>#USR-103</strong></td>
+                    <td><strong>Mehedi Reza</strong></td>
+                    <td>DIU • EEE (Batch 49)</td>
+                    <td>01933445566<br><span style="font-size:11px; color:var(--color-text-muted);">mehedi.eee@diu.edu.bd</span></td>
+                    <td>Model Town, Ashulia</td>
+                    <td><span class="badge badge-success">Active</span></td>
+                    <td>
+                      <button class="btn btn-outline btn-sm" onclick="alert('Student: Mehedi Reza\nOrders placed: 2\nTotal spent: ৳180.00\nLoyalty Points: 800 pts')">Details</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ========================================================
+             TAB 4: SHOP MANAGEMENT (Requested Feature 7)
+        ======================================================== -->
+        <div class="admin-tab-pane" id="pane-shops">
+          <div class="card card-padded">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap: 12px; margin-bottom: 1.25rem;">
+              <h3 style="font-size: 1.2rem; color: var(--color-primary); margin:0;">Registered Printing Shops</h3>
+              <div style="font-size:0.875rem; color:var(--color-text-muted);">
+                Managing all active and approved marketplace vendors
+              </div>
+            </div>
+
+            <div class="table-wrapper">
+              <table class="table" id="shopsTable">
+                <thead>
+                  <tr>
+                    <th>Shop ID</th>
+                    <th>Shop Name</th>
+                    <th>Physical Location</th>
+                    <th>Owner &amp; Phone</th>
+                    <th>Rating</th>
+                    <th>Marketplace Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="adminShopsBody">
+                  <!-- Populated by script from CP_SHOPS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ========================================================
+             TAB 5: ORDER MONITORING (Requested Feature 10)
+        ======================================================== -->
+        <div class="admin-tab-pane" id="pane-orders">
+          <div class="card card-padded">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap: 12px; margin-bottom: 1.25rem;">
+              <div>
+                <h3 style="font-size: 1.2rem; color: var(--color-primary); margin:0;">Platform Order Monitoring</h3>
+                <p style="font-size:0.85rem; color:var(--color-text-muted); margin:2px 0 0;">Real-time audit log across all printing shops in DIU–Ashulia</p>
+              </div>
+              <div style="display:flex; gap: 8px;">
+                <select id="adminOrderFilter" class="form-select" style="width: auto;" onchange="filterAdminOrders(this.value)">
+                  <option value="all">All Statuses</option>
+                  <option value="pending">Pending</option>
+                  <option value="ready">Ready</option>
+                  <option value="completed">Completed &amp; Paid</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="table-wrapper">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Order #</th>
+                    <th>Date</th>
+                    <th>Student Name</th>
+                    <th>Selected Shop</th>
+                    <th>Document</th>
+                    <th>Total</th>
+                    <th>Payment</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="monitoringOrdersBody">
+                  <!-- Injected by script -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Trade License Document Inspection Modal -->
+  <div class="modal-overlay" id="licenseModal">
+    <div class="modal modal-lg">
+      <div class="modal-header">
+        <h3 class="modal-title">📄 Official Trade License Inspection</h3>
+        <button class="modal-close" onclick="closeTradeLicenseModal()">×</button>
+      </div>
+      <div class="modal-body" style="text-align: center;">
+        <div style="background: #F1F5F9; border: 2px dashed #CBD5E1; border-radius: 12px; padding: 2.5rem 1.5rem;">
+          <div style="font-size: 3.5rem; margin-bottom: 0.5rem;">📜</div>
+          <h4 style="font-size: 1.2rem; color: var(--color-primary); margin-bottom: 4px;">SAVAR POURASHABHA – TRADE LICENSE</h4>
+          <p style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 1.5rem;">
+            License No: <strong>TRAD/SAVAR/2026/84912</strong> • Financial Year: <strong>2026–2027</strong>
+          </p>
+
+          <div style="display:inline-block; text-align:left; background:white; border:1px solid #E2E8F0; border-radius:8px; padding:1.25rem 2rem; font-size:0.9rem; line-height: 1.8;">
+            <div><strong>Business Name:</strong> Modern Xerox &amp; Prints</div>
+            <div><strong>Proprietor:</strong> Md. Mominul Islam</div>
+            <div><strong>Nature of Business:</strong> Digital Printing, Xerox, Computer Services</div>
+            <div><strong>Business Address:</strong> Daffodil Smart City Gate 2, Ashulia, Dhaka</div>
+            <div><strong>Issuing Date:</strong> 15-January-2026 (Valid till 30-June-2027)</div>
+            <div><strong>Verification Status:</strong> <span class="badge badge-success">Official Seal &amp; Signature Valid</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" onclick="closeTradeLicenseModal()">Close</button>
+        <button class="btn btn-success" onclick="closeTradeLicenseModal(); adminApproveShop('Modern Xerox & Prints');">
+          ✓ Approve Shop Now
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Placeholder -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Scripts -->
+  <script src="../../js/data/locations.js"></script>
+  <script src="../../js/data/shops.js"></script>
+  <script src="../../js/data/orders.js"></script>
+  <script src="../../js/utils/auth.js"></script>
+  <script src="../../js/components/navbar.js?v=20261121_2"></script>
+  <script src="../../js/components/footer.js"></script>
+  <script>
+    // Tab Switcher
+    function switchAdminTab(tabName, btnElement) {
+      document.querySelectorAll('.admin-tab-pane').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.admin-tab-btn').forEach(b => b.classList.remove('active'));
+
+      const pane = document.getElementById(`pane-${tabName}`);
+      if (pane) pane.classList.add('active');
+
+      const btn = btnElement || document.getElementById(`tab-${tabName}`);
+      if (btn) btn.classList.add('active');
+
+      // Sync sidebar active class
+      document.querySelectorAll('.sidebar-link').forEach(link => {
+        if (link.textContent.toLowerCase().includes(tabName)) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+    }
+
+    // Modal
+    function previewTradeLicenseModal() {
+      document.getElementById('licenseModal').classList.add('open');
+    }
+    function closeTradeLicenseModal() {
+      document.getElementById('licenseModal').classList.remove('open');
+    }
+
+    // Shop Approval / Rejection
+    function adminApproveShop(shopName) {
+      if (confirm(`Approve "${shopName}" and publish it to the live marketplace?`)) {
+        alert(`✅ "${shopName}" has been APPROVED!\nShop is now visible to all students in the marketplace.`);
+        document.getElementById('pendingShopCard').style.display = 'none';
+        document.getElementById('noPendingNotice').style.display = 'block';
+        document.getElementById('overviewPendingAlert').style.display = 'none';
+
+        // Update stats
+        document.getElementById('statPendingShops').textContent = '0';
+        document.getElementById('statApprovedShops').textContent = '6';
+        const badge = document.getElementById('sidebarPendingBadge');
+        if (badge) badge.style.display = 'none';
+        document.getElementById('btnPendingCount').textContent = '0';
+        document.getElementById('tabPendingBadge').textContent = '0';
+      }
+    }
+
+    function adminRejectShop(shopName) {
+      const reason = prompt(`Enter rejection notice for ${shopName}:`, 'Trade license document was illegible or incomplete');
+      if (reason) {
+        alert(`❌ Application for "${shopName}" REJECTED.\nNotification sent to owner with reason: "${reason}".`);
+        document.getElementById('pendingShopCard').style.display = 'none';
+        document.getElementById('noPendingNotice').style.display = 'block';
+        document.getElementById('overviewPendingAlert').style.display = 'none';
+
+        document.getElementById('statPendingShops').textContent = '0';
+        const badge = document.getElementById('sidebarPendingBadge');
+        if (badge) badge.style.display = 'none';
+        document.getElementById('btnPendingCount').textContent = '0';
+        document.getElementById('tabPendingBadge').textContent = '0';
+      }
+    }
+
+    // Populate Tables from Data Layer
+    document.addEventListener('DOMContentLoaded', function () {
+      // 1. Ensure Admin session
+      let session = CampusPrint.auth.getSession();
+      if (!session || session.role !== 'admin') {
+        CampusPrint.auth.setSession({
+          id: 1,
+          name: "Platform Administrator",
+          email: "admin@campusprint.com",
+          role: "admin"
+        });
+      }
+
+      // 2. Populate Shops Table
+      const shops = (typeof window.CP_SHOPS !== 'undefined') ? window.CP_SHOPS : [];
+      const shopsTbody = document.getElementById('adminShopsBody');
+      if (shopsTbody) {
+        shopsTbody.innerHTML = shops.map(shop => `
+          <tr>
+            <td><strong>#SHP-00${shop.id}</strong></td>
+            <td><strong>${shop.name}</strong><br><span style="font-size:11px; color:var(--color-text-muted);">${shop.address}</span></td>
+            <td>📍 ${shop.address.split(',')[0]}</td>
+            <td>${shop.owner_name}<br><a href="tel:${shop.phone}" style="font-size:11px;">📞 ${shop.phone}</a></td>
+            <td>⭐ ${shop.rating} (${shop.total_reviews})</td>
+            <td><span class="badge badge-success">Approved (Live)</span></td>
+            <td>
+              <button class="btn btn-outline btn-sm" onclick="alert('Viewing Shop Profile for: ${shop.name}\nB&W Rate: ৳${shop.pricing.bw_a4_single}\nColor Rate: ৳${shop.pricing.color_a4_single}')">Inspect</button>
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      // 3. Populate Orders Table
+      const orders = (typeof window.CP_ORDERS !== 'undefined') ? window.CP_ORDERS : [];
+      const overviewBody = document.getElementById('overviewOrdersBody');
+      const monitoringBody = document.getElementById('monitoringOrdersBody');
+
+      const renderOrderRow = (order) => `
+        <tr>
+          <td><strong>#${order.id}</strong></td>
+          <td style="font-size:12px; color:var(--color-text-muted);">${order.created_at}</td>
+          <td>${order.customer_name}</td>
+          <td><strong>${order.shop_name}</strong></td>
+          <td style="max-width:180px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${order.document_name}</td>
+          <td><strong>৳${order.total_payable.toFixed(2)}</strong></td>
+          <td>${order.payment_status === 'paid' ? '<span class="badge badge-success">Paid (COD)</span>' : '<span class="badge badge-warning">COD Due</span>'}</td>
+          <td><span class="status-badge status-${order.order_status}">${order.order_status.toUpperCase()}</span></td>
+        </tr>
+      `;
+
+      if (overviewBody) {
+        overviewBody.innerHTML = orders.slice(0, 3).map(renderOrderRow).join('');
+      }
+      if (monitoringBody) {
+        monitoringBody.innerHTML = orders.map(renderOrderRow).join('');
+      }
+    });
+
+    // Customer search
+    function filterCustomerTable() {
+      const q = document.getElementById('customerSearch').value.toLowerCase();
+      document.querySelectorAll('#customerTable tbody tr').forEach(row => {
+        row.style.display = row.textContent.toLowerCase().includes(q) ? '' : 'none';
+      });
+    }
+
+    // Order monitoring filter
+    function filterAdminOrders(status) {
+      let orders = (typeof window.CP_ORDERS !== 'undefined') ? window.CP_ORDERS : [];
+      if (status !== 'all') {
+        orders = orders.filter(o => o.order_status === status);
+      }
+      const monitoringBody = document.getElementById('monitoringOrdersBody');
+      if (monitoringBody) {
+        monitoringBody.innerHTML = orders.map(order => `
+          <tr>
+            <td><strong>#${order.id}</strong></td>
+            <td style="font-size:12px; color:var(--color-text-muted);">${order.created_at}</td>
+            <td>${order.customer_name}</td>
+            <td><strong>${order.shop_name}</strong></td>
+            <td style="max-width:180px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${order.document_name}</td>
+            <td><strong>৳${order.total_payable.toFixed(2)}</strong></td>
+            <td>${order.payment_status === 'paid' ? '<span class="badge badge-success">Paid (COD)</span>' : '<span class="badge badge-warning">COD Due</span>'}</td>
+            <td><span class="status-badge status-${order.order_status}">${order.order_status.toUpperCase()}</span></td>
+          </tr>
+        `).join('');
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Portal Login – CampusPrint</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../css/global.css" />
+  <link rel="stylesheet" href="../../css/components.css" />
+</head>
+<body class="page-wrapper" style="background-color: var(--color-primary-900);">
+
+  <!-- Navbar Placeholder -->
+  <div id="navbar-placeholder"></div>
+
+  <!-- Main Content -->
+  <main class="main-content" style="display:flex; align-items:center; justify-content:center; padding: 4rem 1rem;">
+    <div style="width: 100%; max-width: 420px;">
+
+      <!-- Role Switcher Segmented Control -->
+      <div style="display: flex; background: #1E293B; padding: 4px; border-radius: 12px; margin-bottom: 1.25rem; gap: 4px; border: 1px solid #334155;">
+        <a href="../customer/login.html" style="flex:1; text-align:center; padding: 8px 10px; font-size: 0.825rem; font-weight: 600; border-radius: 8px; text-decoration: none; color: #94A3B8;">🎓 Student</a>
+        <a href="../shop-owner/login.html" style="flex:1; text-align:center; padding: 8px 10px; font-size: 0.825rem; font-weight: 600; border-radius: 8px; text-decoration: none; color: #94A3B8;">🏪 Shop Owner</a>
+        <a href="login.html" style="flex:1; text-align:center; padding: 8px 10px; font-size: 0.825rem; font-weight: 700; border-radius: 8px; text-decoration: none; color: #FFFFFF; background: #0284C7; box-shadow: 0 1px 3px rgba(0,0,0,0.3);">🛡️ Admin</a>
+      </div>
+
+      <div class="form-card" style="box-shadow: var(--shadow-2xl);">
+        <div style="text-align: center; margin-bottom: 2rem;">
+          <div style="width:52px; height:52px; border-radius:14px; background:linear-gradient(135deg,#0F172A,#1E3A8A); display:flex; align-items:center; justify-content:center; color:white; font-size:24px; margin: 0 auto 1rem;">
+            🛡️
+          </div>
+          <h1 style="font-size: 1.6rem; color: var(--color-primary); margin-bottom: 0.35rem;">CampusPrint Admin</h1>
+          <p style="font-size: 0.85rem; color: var(--color-text-secondary);">Platform monitoring, shop approvals &amp; user management</p>
+        </div>
+
+        <!-- 1-Click Demo Quick Fill -->
+        <div style="background: #EFF6FF; border: 1px dashed #93C5FD; border-radius: 10px; padding: 12px; margin-bottom: 1.5rem; text-align: center;">
+          <button type="button" class="btn btn-primary btn-sm btn-full" onclick="CampusPrint.auth.demoLogin('admin')">
+            ⚡ 1-Click Demo Admin Login
+          </button>
+        </div>
+
+        <form onsubmit="handleAdminLogin(event)">
+          <div class="form-group">
+            <label class="form-label">Administrator Email <span class="required">*</span></label>
+            <input type="email" id="adminEmail" class="form-input" required value="admin@campusprint.com" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Security Key / Password <span class="required">*</span></label>
+            <input type="password" id="adminPass" class="form-input" required value="admin2026" />
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-full btn-lg">
+            Authenticate Administrator
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer Placeholder -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Scripts -->
+  <script src="../../js/utils/auth.js"></script>
+  <script src="../../js/components/navbar.js?v=20261121_2"></script>
+  <script src="../../js/components/footer.js"></script>
+  <script>
+    function handleAdminLogin(e) {
+      e.preventDefault();
+      CampusPrint.auth.demoLogin('admin');
+    }
+  </script>
+</body>
+</html>

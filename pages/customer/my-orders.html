@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Orders – CampusPrint</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../css/global.css" />
+  <link rel="stylesheet" href="../../css/components.css" />
+  <link rel="stylesheet" href="../../css/dashboard-customer.css" />
+</head>
+<body class="page-wrapper" style="background-color: var(--color-bg-light);">
+
+  <!-- Navbar Placeholder -->
+  <div id="navbar-placeholder"></div>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="dashboard-layout">
+
+      <!-- Left Sidebar -->
+      <aside class="sidebar">
+        <div class="sidebar-logo">
+          <div style="font-weight: 700; color: var(--color-primary); font-size: 0.95rem;">Student Portal</div>
+          <div style="font-size: 0.75rem; color: var(--color-text-muted);">CampusPrint DIU</div>
+        </div>
+        <div class="sidebar-section-label">Main Menu</div>
+        <a href="dashboard.html" class="sidebar-link"><span class="sidebar-link-icon">📊</span><span>Dashboard Overview</span></a>
+        <a href="place-order.html" class="sidebar-link"><span class="sidebar-link-icon">🖨️</span><span>Place New Order</span></a>
+        <a href="track-order.html" class="sidebar-link"><span class="sidebar-link-icon">📍</span><span>Track Active Order</span></a>
+        <a href="my-orders.html" class="sidebar-link active"><span class="sidebar-link-icon">📦</span><span>My Orders History</span></a>
+        <a href="my-rewards.html" class="sidebar-link"><span class="sidebar-link-icon">🎁</span><span>Bonus Points &amp; Rewards</span></a>
+        <a href="favorite-shops.html" class="sidebar-link"><span class="sidebar-link-icon">❤️</span><span>Favorite Shops</span></a>
+        <div class="sidebar-section-label" style="margin-top: 1.5rem;">Account</div>
+        <a href="my-profile.html" class="sidebar-link"><span class="sidebar-link-icon">👤</span><span>My Profile</span></a>
+        <button class="sidebar-link" onclick="CampusPrint.auth.logout()" style="width:100%; text-align:left; background:none; border:none; cursor:pointer; color:var(--color-danger);"><span class="sidebar-link-icon">🚪</span><span>Logout</span></button>
+      </aside>
+
+      <!-- Right Content -->
+      <div class="dashboard-content">
+        <div class="dashboard-header">
+          <div>
+            <h1 style="font-size: 1.75rem; color: var(--color-primary); margin-bottom: 0.25rem;">My Orders History</h1>
+            <p>Review and re-order your past university printing orders</p>
+          </div>
+          <a href="place-order.html" class="btn btn-primary">
+            <span>🖨️</span> <span>Place New Order</span>
+          </a>
+        </div>
+
+        <div class="filter-bar mb-6">
+          <button class="filter-chip active" onclick="filterOrderTab('all', this)">All Orders</button>
+          <button class="filter-chip" onclick="filterOrderTab('active', this)">Active / In Progress</button>
+          <button class="filter-chip" onclick="filterOrderTab('completed', this)">Completed &amp; Paid</button>
+        </div>
+
+        <div class="dashboard-panel">
+          <div class="table-wrapper">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Order #</th>
+                  <th>Date</th>
+                  <th>Shop</th>
+                  <th>Document</th>
+                  <th>Total</th>
+                  <th>Payment</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="myOrdersTableBody">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer Placeholder -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Scripts -->
+  <script src="../../js/data/orders.js"></script>
+  <script src="../../js/utils/auth.js"></script>
+  <script src="../../js/components/navbar.js?v=20261121_2"></script>
+  <script src="../../js/components/footer.js"></script>
+  <script>
+    let currentFilter = 'all';
+
+    function filterOrderTab(tab, btn) {
+      currentFilter = tab;
+      document.querySelectorAll('.filter-bar .filter-chip').forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      renderOrders();
+    }
+
+    function renderOrders() {
+      let orders = (typeof window.CP_ORDERS !== 'undefined') ? window.CP_ORDERS : [];
+      try {
+        const saved = localStorage.getItem('cp_orders');
+        if (saved) orders = JSON.parse(saved);
+      } catch (e) {}
+
+      if (currentFilter === 'active') {
+        orders = orders.filter(o => ['pending', 'accepted', 'processing', 'ready'].includes(o.order_status));
+      } else if (currentFilter === 'completed') {
+        orders = orders.filter(o => o.order_status === 'completed');
+      }
+
+      const tbody = document.getElementById('myOrdersTableBody');
+      if (!tbody) return;
+
+      if (orders.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="8" class="text-center" style="padding: 3rem 1rem; color: var(--color-text-muted);">No orders found in this category.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = orders.map(order => {
+        const statusClass = `status-${order.order_status}`;
+        const payBadge = order.payment_status === 'paid' 
+          ? `<span class="badge badge-success">Paid</span>` 
+          : `<span class="badge badge-warning">COD Due</span>`;
+
+        return `
+          <tr>
+            <td><strong>#${order.id}</strong></td>
+            <td style="font-size:12px; color:var(--color-text-muted);">${order.created_at}</td>
+            <td><strong>${order.shop_name}</strong></td>
+            <td style="max-width:180px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${order.document_name}</td>
+            <td><strong>৳${order.total_payable.toFixed(2)}</strong></td>
+            <td>${payBadge}</td>
+            <td><span class="status-badge ${statusClass}">${order.order_status.toUpperCase()}</span></td>
+            <td>
+              <div style="display:flex; gap:6px;">
+                <a href="track-order.html?order_id=${order.id}" class="btn btn-outline btn-sm">Track</a>
+                <a href="place-order.html?shop_id=${order.shop_id}" class="btn btn-ghost btn-sm" title="Reorder from this shop">🔁</a>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    document.addEventListener('DOMContentLoaded', renderOrders);
+  </script>
+</body>
+</html>

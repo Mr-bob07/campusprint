@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Track Order – CampusPrint</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../css/global.css" />
+  <link rel="stylesheet" href="../../css/components.css" />
+  <link rel="stylesheet" href="../../css/dashboard-customer.css" />
+</head>
+<body class="page-wrapper" style="background-color: var(--color-bg-light);">
+
+  <!-- Navbar Placeholder -->
+  <div id="navbar-placeholder"></div>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="dashboard-layout">
+
+      <!-- Left Sidebar -->
+      <aside class="sidebar">
+        <div class="sidebar-logo">
+          <div style="font-weight: 700; color: var(--color-primary); font-size: 0.95rem;">Student Portal</div>
+          <div style="font-size: 0.75rem; color: var(--color-text-muted);">CampusPrint DIU</div>
+        </div>
+        <div class="sidebar-section-label">Main Menu</div>
+        <a href="dashboard.html" class="sidebar-link"><span class="sidebar-link-icon">📊</span><span>Dashboard Overview</span></a>
+        <a href="place-order.html" class="sidebar-link"><span class="sidebar-link-icon">🖨️</span><span>Place New Order</span></a>
+        <a href="track-order.html" class="sidebar-link active"><span class="sidebar-link-icon">📍</span><span>Track Active Order</span></a>
+        <a href="my-orders.html" class="sidebar-link"><span class="sidebar-link-icon">📦</span><span>My Orders History</span></a>
+        <a href="my-rewards.html" class="sidebar-link"><span class="sidebar-link-icon">🎁</span><span>Bonus Points &amp; Rewards</span></a>
+        <a href="favorite-shops.html" class="sidebar-link"><span class="sidebar-link-icon">❤️</span><span>Favorite Shops</span></a>
+        <div class="sidebar-section-label" style="margin-top: 1.5rem;">Account</div>
+        <a href="my-profile.html" class="sidebar-link"><span class="sidebar-link-icon">👤</span><span>My Profile</span></a>
+        <button class="sidebar-link" onclick="CampusPrint.auth.logout()" style="width:100%; text-align:left; background:none; border:none; cursor:pointer; color:var(--color-danger);"><span class="sidebar-link-icon">🚪</span><span>Logout</span></button>
+      </aside>
+
+      <!-- Right Content -->
+      <div class="dashboard-content" style="max-width: 900px;">
+        <div class="dashboard-header">
+          <div>
+            <h1 style="font-size: 1.5rem; color: var(--color-primary); margin-bottom: 4px;">Live Order Tracking</h1>
+            <p style="font-size: 0.85rem; color: var(--color-text-muted);">Real-time progress of your printing order</p>
+          </div>
+          <div style="display:flex; gap: 8px;">
+            <input type="text" id="trackInput" class="form-input" placeholder="Enter Order ID (e.g. CP-1049)" style="width: 190px;" />
+            <button class="btn btn-primary btn-sm" onclick="searchOrder()">Search</button>
+          </div>
+        </div>
+
+        <div id="trackResultContainer">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer Placeholder -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Scripts -->
+  <script src="../../js/data/orders.js"></script>
+  <script src="../../js/utils/auth.js"></script>
+  <script src="../../js/components/navbar.js?v=20261121_2"></script>
+  <script src="../../js/components/footer.js"></script>
+  <script>
+    function getQueryOrderId() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('order_id') || 'CP-1049';
+    }
+
+    function searchOrder() {
+      const id = document.getElementById('trackInput').value.trim();
+      if (id) {
+        window.location.href = `track-order.html?order_id=${id}`;
+      }
+    }
+
+    function renderOrderTracking(orderId) {
+      let orders = (typeof window.CP_ORDERS !== 'undefined') ? window.CP_ORDERS : [];
+      try {
+        const saved = localStorage.getItem('cp_orders');
+        if (saved) orders = JSON.parse(saved);
+      } catch (e) {}
+
+      const order = orders.find(o => o.id === orderId) || orders[0];
+      const container = document.getElementById('trackResultContainer');
+      if (!container) return;
+
+      if (!order) {
+        container.innerHTML = `<div class="empty-state"><h3>Order Not Found</h3><p>We could not find order ${orderId}.</p></div>`;
+        return;
+      }
+
+      // Determine step active index
+      const steps = ['pending', 'accepted', 'processing', 'ready', 'completed'];
+      let activeIndex = steps.indexOf(order.order_status);
+      if (activeIndex === -1) activeIndex = 0;
+
+      container.innerHTML = `
+        <div class="dashboard-panel mb-6">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap: 10px; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-border);">
+            <div>
+              <span style="font-size: 0.8rem; color: var(--color-text-muted);">Tracking Order</span>
+              <h2 style="font-size: 1.5rem; color: var(--color-primary); margin: 0;">#${order.id}</h2>
+            </div>
+            <div>
+              <span class="status-badge status-${order.order_status}" style="font-size:14px; padding:6px 16px;">
+                ${order.order_status.toUpperCase()}
+              </span>
+            </div>
+          </div>
+
+          <!-- Timeline -->
+          <div class="order-timeline" style="margin: 2rem 0;">
+            <div class="timeline-step ${activeIndex >= 0 ? (activeIndex === 0 ? 'active' : 'completed') : ''}">
+              <div class="timeline-dot">${activeIndex > 0 ? '✓' : '1'}</div>
+              <div class="timeline-title">Placed</div>
+            </div>
+            <div class="timeline-step ${activeIndex >= 1 ? (activeIndex === 1 ? 'active' : 'completed') : ''}">
+              <div class="timeline-dot">${activeIndex > 1 ? '✓' : '2'}</div>
+              <div class="timeline-title">Accepted</div>
+            </div>
+            <div class="timeline-step ${activeIndex >= 2 ? (activeIndex === 2 ? 'active' : 'completed') : ''}">
+              <div class="timeline-dot">${activeIndex > 2 ? '✓' : '3'}</div>
+              <div class="timeline-title">Printing</div>
+            </div>
+            <div class="timeline-step ${activeIndex >= 3 ? (activeIndex === 3 ? 'active' : 'completed') : ''}">
+              <div class="timeline-dot">${activeIndex > 3 ? '✓' : '4'}</div>
+              <div class="timeline-title">Ready / Out</div>
+            </div>
+            <div class="timeline-step ${activeIndex >= 4 ? 'active' : ''}">
+              <div class="timeline-dot">${activeIndex >= 4 ? '✓' : '5'}</div>
+              <div class="timeline-title">Completed</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Order Information Cards -->
+        <div class="grid-2 gap-6">
+          <div class="dashboard-panel">
+            <h3 style="font-size: 1.1rem; color: var(--color-primary); margin-bottom: 1rem;">🖨️ Print &amp; Document Specs</h3>
+            <div style="font-size: 0.9rem; display:flex; flex-direction:column; gap: 8px;">
+              <div><strong>Document:</strong> ${order.document_name}</div>
+              <div><strong>Selected Shop:</strong> ${order.shop_name}</div>
+              <div><strong>Print Details:</strong> ${order.print_type.toUpperCase()} • ${order.paper_size} • ${order.print_side} sided</div>
+              <div><strong>Volume:</strong> ${order.pages} pages × ${order.copies} set(s)</div>
+              <div><strong>Finishing:</strong> ${order.binding || 'None'} • ${order.lamination || 'None'}</div>
+            </div>
+          </div>
+
+          <div class="dashboard-panel">
+            <h3 style="font-size: 1.1rem; color: var(--color-primary); margin-bottom: 1rem;">💵 Fulfillment &amp; Payment</h3>
+            <div style="font-size: 0.9rem; display:flex; flex-direction:column; gap: 8px;">
+              <div><strong>Fulfillment:</strong> ${order.delivery_type === 'home_delivery' ? '🏠 Home Delivery' : '🏬 Self Pickup'}</div>
+              <div><strong>Address:</strong> ${order.delivery_address}</div>
+              <div><strong>Payment Method:</strong> Cash on Delivery (COD)</div>
+              <div><strong>Payment Status:</strong> ${order.payment_status === 'paid' ? '<span class="badge badge-success">Paid</span>' : '<span class="badge badge-warning">COD Due</span>'}</div>
+              <div style="font-size:1.15rem; font-weight:700; color:var(--color-primary); margin-top:8px; padding-top:8px; border-top:1px solid #E2E8F0;">
+                Total Payable: ৳${order.total_payable.toFixed(2)}
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const orderId = getQueryOrderId();
+      document.getElementById('trackInput').value = orderId;
+      renderOrderTracking(orderId);
+    });
+  </script>
+</body>
+</html>

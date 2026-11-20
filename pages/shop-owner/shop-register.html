@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register Printing Shop (Step 2 of 2) – CampusPrint</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../css/global.css" />
+  <link rel="stylesheet" href="../../css/components.css" />
+</head>
+<body class="page-wrapper" style="background-color: var(--color-bg-light);">
+
+  <!-- Navbar Placeholder -->
+  <div id="navbar-placeholder"></div>
+
+  <!-- Main Content -->
+  <main class="main-content" style="padding: 3rem 1rem;">
+    <div style="width: 100%; max-width: 760px; margin: 0 auto;">
+
+      <!-- Step Indicator -->
+      <div class="step-indicator" style="margin-bottom: 2rem;">
+        <div class="step completed">
+          <div class="step-number">✓</div>
+          <div class="step-label">Owner Account</div>
+        </div>
+        <div class="step-line completed"></div>
+        <div class="step active">
+          <div class="step-number">2</div>
+          <div class="step-label">Shop &amp; Trade License</div>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <div style="text-align: center; margin-bottom: 2rem;">
+          <h1 style="font-size: 1.6rem; color: var(--color-primary); margin-bottom: 0.35rem;">Step 2: Shop Details &amp; Verification</h1>
+          <p style="font-size: 0.875rem; color: var(--color-text-secondary);">Submit your shop details and trade license for marketplace approval</p>
+        </div>
+
+        <div class="alert alert-warning mb-6">
+          <span class="alert-icon">🔒</span>
+          <div>
+            <strong>Confidentiality Guarantee:</strong> Trade license document, number, and NID are strictly protected. They will only be visible to platform administrators for verification.
+          </div>
+        </div>
+
+        <form onsubmit="handleShopSubmit(event)">
+          <!-- Basic Shop Info -->
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Shop Commercial Name <span class="required">*</span></label>
+              <input type="text" name="shop_name" id="shopName" class="form-input" required placeholder="e.g. Modern Xerox &amp; Prints" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Physical Shop Location Area <span class="required">*</span></label>
+              <select name="shop_location_id" id="shopLocationSelect" class="form-select" required>
+                <!-- Populated from locations.js -->
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Complete Shop Address <span class="required">*</span></label>
+            <input type="text" name="address" class="form-input" required placeholder="Shop No, Building, Road name/landmark" />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Shop Contact Phone <span class="required">*</span></label>
+              <input type="tel" name="shop_phone" class="form-input" required placeholder="01XXXXXXXXX" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Shop Email <span class="required">*</span></label>
+              <input type="email" name="shop_email" class="form-input" required placeholder="shopname@gmail.com" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Opening &amp; Closing Hours <span class="required">*</span></label>
+              <input type="text" name="opening_hours" class="form-input" required placeholder="e.g. 8:30 AM - 10:30 PM" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Estimated Prep Speed</label>
+              <input type="text" name="prep_time" class="form-input" placeholder="e.g. 20-30 mins" value="25-35 mins" />
+            </div>
+          </div>
+
+          <!-- Trade License Section -->
+          <div style="background: var(--color-bg-light); border: 1.5px solid var(--color-border); border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 1rem;">
+              <strong style="color:var(--color-primary); font-size:1rem;">Trade License Verification</strong>
+              <span class="badge badge-warning">Required</span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Trade License Number <span class="required">*</span></label>
+              <input type="text" name="trade_license_number" class="form-input" required placeholder="e.g. TRAD/SAVAR/2026/XXXXX" />
+            </div>
+
+            <div class="form-group mb-0">
+              <label class="form-label">Upload Trade License Document (PDF / Image) <span class="required">*</span></label>
+              <div class="file-upload-area" onclick="document.getElementById('tradeDocInput').click()">
+                <input type="file" id="tradeDocInput" name="trade_license_doc" accept=".pdf,.jpg,.jpeg,.png" style="display:none;" onchange="updateFileName(this)" />
+                <div class="file-upload-icon">📄</div>
+                <div class="file-upload-text" id="uploadStatusText"><strong>Click to select document</strong> or drag and drop</div>
+                <div class="file-upload-hint">PDF or JPG/PNG image up to 10MB</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Available Services Checkboxes -->
+          <div class="form-group">
+            <label class="form-label">Printing Services Offered <span class="required">*</span></label>
+            <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+              <label class="form-check"><input type="checkbox" name="services[]" value="B&W Print" checked /><span class="form-check-label">B&W Printing</span></label>
+              <label class="form-check"><input type="checkbox" name="services[]" value="Color Print" checked /><span class="form-check-label">Color Printing</span></label>
+              <label class="form-check"><input type="checkbox" name="services[]" value="Spiral Binding" checked /><span class="form-check-label">Spiral Binding</span></label>
+              <label class="form-check"><input type="checkbox" name="services[]" value="Tape Binding" checked /><span class="form-check-label">Tape Binding</span></label>
+              <label class="form-check"><input type="checkbox" name="services[]" value="Hardcover Thesis" /><span class="form-check-label">Thesis Hardcover</span></label>
+              <label class="form-check"><input type="checkbox" name="services[]" value="Lamination" checked /><span class="form-check-label">Lamination</span></label>
+            </div>
+          </div>
+
+          <!-- Delivery Areas Selection -->
+          <div class="form-group">
+            <label class="form-label">Areas Where Your Shop Delivers (Home Delivery)</label>
+            <div id="deliveryAreaCheckboxes" style="display:flex; flex-direction:column; gap: 8px;">
+              <!-- Populated dynamically with default charge input -->
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-full btn-lg mb-4">
+            Submit Shop for Verification
+          </button>
+        </form>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer Placeholder -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Scripts -->
+  <script src="../../js/data/locations.js"></script>
+  <script src="../../js/utils/auth.js"></script>
+  <script src="../../js/components/navbar.js?v=20261121_2"></script>
+  <script src="../../js/components/footer.js"></script>
+  <script>
+    function updateFileName(input) {
+      if (input.files && input.files[0]) {
+        document.getElementById('uploadStatusText').innerHTML = `Selected: <strong>${input.files[0].name}</strong>`;
+      }
+    }
+
+    function init() {
+      // Populate Physical Shop Location Dropdown
+      const locSelect = document.getElementById('shopLocationSelect');
+      const delivContainer = document.getElementById('deliveryAreaCheckboxes');
+
+      if (typeof window.CP_LOCATIONS !== 'undefined') {
+        window.CP_LOCATIONS.forEach(loc => {
+          // Add to physical location select
+          const opt = document.createElement('option');
+          opt.value = loc.id;
+          opt.textContent = `${loc.name} (${loc.district})`;
+          locSelect.appendChild(opt);
+
+          // Add to delivery area checkboxes
+          const row = document.createElement('div');
+          row.style = 'display:flex; align-items:center; justify-content:space-between; background:white; border:1px solid #E2E8F0; padding:8px 12px; border-radius:8px;';
+          row.innerHTML = `
+            <label class="form-check" style="margin:0;">
+              <input type="checkbox" name="delivery_area_ids[]" value="${loc.id}" checked />
+              <span class="form-check-label">${loc.name}</span>
+            </label>
+            <div style="display:flex; align-items:center; gap:6px; font-size:12px;">
+              <span>Delivery Charge (৳):</span>
+              <input type="number" name="delivery_charge_${loc.id}" value="${loc.default_delivery_charge}" class="form-input" style="width:70px; padding:4px 8px; text-align:center;" />
+            </div>
+          `;
+          delivContainer.appendChild(row);
+        });
+      }
+    }
+
+    function handleShopSubmit(e) {
+      e.preventDefault();
+      const shopName = document.getElementById('shopName').value;
+      const ownerName = sessionStorage.getItem('cp_temp_owner_name') || "Shop Owner";
+      const ownerEmail = sessionStorage.getItem('cp_temp_owner_email') || "owner@gmail.com";
+
+      // Set logged-in owner session with pending verification flag
+      CampusPrint.auth.setSession({
+        id: 202,
+        name: ownerName,
+        email: ownerEmail,
+        role: "shop_owner",
+        shop_name: shopName,
+        status: "pending_verification"
+      });
+
+      alert("🎉 Shop registration submitted successfully! Status: 'Pending Verification'. Redirecting to your Shop Owner Dashboard...");
+      window.location.href = "dashboard.html";
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>

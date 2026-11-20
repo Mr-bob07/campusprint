@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Login – CampusPrint</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../css/global.css" />
+  <link rel="stylesheet" href="../../css/components.css" />
+</head>
+<body class="page-wrapper" style="background-color: var(--color-bg-light);">
+
+  <!-- Navbar Placeholder -->
+  <div id="navbar-placeholder"></div>
+
+  <!-- Main Content -->
+  <main class="main-content" style="display:flex; align-items:center; justify-content:center; padding: 4rem 1rem;">
+    <div style="width: 100%; max-width: 440px;">
+
+      <!-- Role Switcher Segmented Control -->
+      <div style="display: flex; background: #E2E8F0; padding: 4px; border-radius: 12px; margin-bottom: 1.25rem; gap: 4px;">
+        <a href="login.html" style="flex:1; text-align:center; padding: 8px 10px; font-size: 0.825rem; font-weight: 700; border-radius: 8px; text-decoration: none; color: #1E3A8A; background: #FFFFFF; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">🎓 Student</a>
+        <a href="../shop-owner/login.html" style="flex:1; text-align:center; padding: 8px 10px; font-size: 0.825rem; font-weight: 600; border-radius: 8px; text-decoration: none; color: #64748B;">🏪 Shop Owner</a>
+        <a href="../admin/login.html" style="flex:1; text-align:center; padding: 8px 10px; font-size: 0.825rem; font-weight: 600; border-radius: 8px; text-decoration: none; color: #64748B;">🛡️ Admin</a>
+      </div>
+
+      <div class="form-card">
+        <!-- Redirect Order Notice -->
+        <div id="orderRedirectNotice" style="display:none; background:#EFF6FF; border:1px solid #93C5FD; border-radius:10px; padding:12px; margin-bottom:1.5rem; color:#1E40AF; font-size:0.875rem;">
+          🛒 <strong>Student Login Required</strong>: Please sign in (or click the 1-Click Demo button below) to complete placing your printing order.
+        </div>
+
+        <div style="text-align: center; margin-bottom: 2rem;">
+          <div style="width:52px; height:52px; border-radius:14px; background:linear-gradient(135deg,#1E3A8A,#0284C7); display:flex; align-items:center; justify-content:center; color:white; font-size:24px; margin: 0 auto 1rem;">
+            🎓
+          </div>
+          <h1 style="font-size: 1.75rem; color: var(--color-primary); margin-bottom: 0.35rem;">Student Login</h1>
+          <p style="font-size: 0.875rem; color: var(--color-text-secondary);">Access your orders, tracking, and loyalty points</p>
+        </div>
+
+        <!-- 1-Click Demo Quick Fill -->
+        <div style="background: #EFF6FF; border: 1px dashed #93C5FD; border-radius: 10px; padding: 12px; margin-bottom: 1.5rem; text-align: center;">
+          <div style="font-size: 0.75rem; font-weight: 700; color: #1E40AF; text-transform: uppercase; margin-bottom: 6px;">Testing Shortcut</div>
+          <button type="button" class="btn btn-accent btn-sm btn-full" onclick="CampusPrint.auth.demoLogin('customer')">
+            ⚡ 1-Click Demo Student Login
+          </button>
+        </div>
+
+        <form onsubmit="handleCustomerLogin(event)">
+          <div class="form-group">
+            <label class="form-label">Email or Student ID <span class="required">*</span></label>
+            <div class="input-group">
+              <span class="input-icon">✉️</span>
+              <input type="email" name="email" id="loginEmail" class="form-input" required placeholder="student@diu.edu.bd" value="student@diu.edu.bd" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 6px;">
+              <label class="form-label" style="margin-bottom:0;">Password <span class="required">*</span></label>
+              <a href="#" style="font-size:0.75rem; color:var(--color-accent);">Forgot password?</a>
+            </div>
+            <div class="input-group">
+              <span class="input-icon">🔒</span>
+              <input type="password" name="password" id="loginPassword" class="form-input" required placeholder="••••••••" value="demo1234" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-check">
+              <input type="checkbox" name="remember_me" checked />
+              <span class="form-check-label">Remember my login</span>
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-full btn-lg mb-4">
+            Sign In to Account
+          </button>
+        </form>
+
+        <div style="text-align: center; font-size: 0.875rem; color: var(--color-text-secondary); border-top: 1px solid var(--color-border); padding-top: 1.25rem;">
+          Don't have an account? <a href="register.html" style="font-weight: 600; color: var(--color-primary);">Register here</a>
+        </div>
+
+        <div style="text-align: center; margin-top: 1rem; font-size: 0.8rem; display:flex; flex-direction:column; gap:6px;">
+          <a href="../shop-owner/login.html" style="color: var(--color-text-muted);">Are you a Shop Owner? <strong>Login here →</strong></a>
+          <a href="../admin/login.html" style="color: var(--color-accent); font-weight:600;">🛡️ Platform Administrator? <strong>Admin Login here →</strong></a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer Placeholder -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Scripts -->
+  <script src="../../js/utils/auth.js"></script>
+  <script src="../../js/components/navbar.js?v=20261121_2"></script>
+  <script src="../../js/components/footer.js"></script>
+  <script>
+    function getRedirectTarget() {
+      const params = new URLSearchParams(window.location.search);
+      const redirect = params.get('redirect');
+      const shopId = params.get('shop_id');
+      if (redirect) {
+        return shopId ? `${redirect}?shop_id=${shopId}` : redirect;
+      }
+      return "dashboard.html";
+    }
+
+    // Show notice if redirected from ordering
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('redirect')) {
+        const notice = document.getElementById('orderRedirectNotice');
+        if (notice) notice.style.display = 'block';
+      }
+    });
+
+    function handleCustomerLogin(e) {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value;
+      CampusPrint.auth.setSession({
+        id: 101,
+        name: "Tanzim Ahmed",
+        email: email,
+        university: "Daffodil International University",
+        role: "customer"
+      });
+      CampusPrint.toast.success("Login Successful!", "Redirecting to your order...");
+      setTimeout(() => {
+        window.location.href = getRedirectTarget();
+      }, 600);
+    }
+  </script>
+</body>
+</html>

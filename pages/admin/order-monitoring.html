@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Global Order Monitoring – CampusPrint Admin</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../css/global.css" />
+  <link rel="stylesheet" href="../../css/components.css" />
+</head>
+<body class="page-wrapper" style="background-color: var(--color-bg-light);">
+
+  <!-- Navbar Placeholder -->
+  <div id="navbar-placeholder"></div>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="dashboard-layout">
+
+      <!-- Left Sidebar -->
+      <aside class="sidebar">
+        <div class="sidebar-logo">
+          <div style="font-weight: 700; color: var(--color-primary); font-size: 0.95rem;">🛡️ Platform Admin</div>
+          <div style="font-size: 0.75rem; color: var(--color-text-muted);">CampusPrint Central</div>
+        </div>
+        <div class="sidebar-section-label">Administration</div>
+        <a href="dashboard.html" class="sidebar-link"><span class="sidebar-link-icon">📊</span><span>Platform Overview</span></a>
+        <a href="shop-approval.html" class="sidebar-link"><span class="sidebar-link-icon">🏪</span><span>Shop Approvals</span></a>
+        <a href="user-management.html" class="sidebar-link"><span class="sidebar-link-icon">👥</span><span>User Management</span></a>
+        <a href="order-monitoring.html" class="sidebar-link active"><span class="sidebar-link-icon">📦</span><span>Order Monitoring</span></a>
+        <div class="sidebar-section-label" style="margin-top: 1.5rem;">Session</div>
+        <button class="sidebar-link" onclick="CampusPrint.auth.logout()" style="width:100%; text-align:left; background:none; border:none; cursor:pointer; color:var(--color-danger);"><span class="sidebar-link-icon">🚪</span><span>Logout</span></button>
+      </aside>
+
+      <!-- Right Content -->
+      <div class="dashboard-content">
+        <div class="dashboard-header">
+          <div>
+            <h1 style="font-size: 1.75rem; color: var(--color-primary); margin-bottom: 0.25rem;">Marketplace Order Oversight</h1>
+            <p>Real-time audit log of all document printing requests across DIU &amp; Ashulia vendor network</p>
+          </div>
+        </div>
+
+        <div class="card card-padded">
+          <div class="table-wrapper">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Student</th>
+                  <th>Assigned Vendor</th>
+                  <th>Amount</th>
+                  <th>Fulfillment</th>
+                  <th>Order Status</th>
+                  <th>Payment</th>
+                </tr>
+              </thead>
+              <tbody id="adminOrdersFeed">
+                <!-- Dynamically populated from orders.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer Placeholder -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Scripts -->
+  <script src="../../js/data/orders.js"></script>
+  <script src="../../js/utils/auth.js"></script>
+  <script src="../../js/components/navbar.js?v=20261121_2"></script>
+  <script src="../../js/components/footer.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      let orders = (typeof window.CP_ORDERS !== 'undefined') ? window.CP_ORDERS : [];
+      try {
+        const saved = localStorage.getItem('cp_orders');
+        if (saved) orders = JSON.parse(saved);
+      } catch (e) {}
+
+      const tbody = document.getElementById('adminOrdersFeed');
+      if (!tbody) return;
+
+      tbody.innerHTML = orders.map(order => {
+        const isPaid = order.payment_status === 'paid';
+        const payBadge = isPaid 
+          ? `<span class="badge badge-success">Paid</span>` 
+          : `<span class="badge badge-warning">COD Due</span>`;
+
+        return `
+          <tr>
+            <td><strong>#${order.id}</strong></td>
+            <td>${order.customer_name}<br><span style="font-size:11px; color:var(--color-text-muted);">${order.customer_phone}</span></td>
+            <td><strong>${order.shop_name}</strong></td>
+            <td><strong>৳${order.total_payable.toFixed(2)}</strong></td>
+            <td>${order.delivery_type === 'home_delivery' ? '🏠 Home Delivery' : '🏬 Self Pickup'}</td>
+            <td><span class="status-badge status-${order.order_status}">${order.order_status.toUpperCase()}</span></td>
+            <td>${payBadge}</td>
+          </tr>
+        `;
+      }).join('');
+    });
+  </script>
+</body>
+</html>

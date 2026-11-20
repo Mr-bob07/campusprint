@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us – CampusPrint</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/global.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body class="page-wrapper">
+
+  <!-- Navbar Placeholder -->
+  <div id="navbar-placeholder"></div>
+
+  <!-- Main Content -->
+  <main class="main-content">
+
+    <section class="page-header" style="background: linear-gradient(135deg, #0F172A 0%, #1E3A8A 65%, #0284C7 100%); color: white; padding: 4rem 0 3rem; margin-bottom: 2rem;">
+      <div class="container text-center">
+        <h1 style="color: white; font-size: 2.5rem; margin-bottom: 0.5rem;">Contact CampusPrint</h1>
+        <p style="color: rgba(255,255,255,0.85); max-width: 600px; margin: 0 auto;">
+          We are here to help university students and local printing shop partners.
+        </p>
+      </div>
+    </section>
+
+    <div class="container mb-12">
+      <div class="grid-2 gap-8">
+
+        <!-- Left: Official Contact Details -->
+        <div>
+          <div class="card card-padded mb-6">
+            <h3 style="font-size: 1.3rem; color: var(--color-primary); margin-bottom: 1.25rem;">Direct Support & Inquiries</h3>
+
+            <div style="display:flex; flex-direction:column; gap: 1.25rem;">
+              <div style="display:flex; align-items:flex-start; gap: 1rem;">
+                <div style="width:44px; height:44px; border-radius:10px; background:#EFF6FF; display:flex; align-items:center; justify-content:center; font-size:1.25rem; flex-shrink:0;">
+                  📧
+                </div>
+                <div>
+                  <strong style="color:var(--color-text-primary);">Email Address</strong><br>
+                  <a href="mailto:sowrovtaluk07@gmail.com" style="color:var(--color-accent); font-weight:600;">sowrovtaluk07@gmail.com</a>
+                  <div style="font-size:0.8rem; color:var(--color-text-muted); margin-top:2px;">Replies within 12–24 business hours</div>
+                </div>
+              </div>
+
+              <div style="display:flex; align-items:flex-start; gap: 1rem;">
+                <div style="width:44px; height:44px; border-radius:10px; background:#EFF6FF; display:flex; align-items:center; justify-content:center; font-size:1.25rem; flex-shrink:0;">
+                  📞
+                </div>
+                <div>
+                  <strong style="color:var(--color-text-primary);">Helpline Phone</strong><br>
+                  <a href="tel:01921646409" style="color:var(--color-accent); font-weight:600;">01921646409</a>
+                  <div style="font-size:0.8rem; color:var(--color-text-muted); margin-top:2px;">Available Saturday – Thursday (9am - 9pm)</div>
+                </div>
+              </div>
+
+              <div style="display:flex; align-items:flex-start; gap: 1rem;">
+                <div style="width:44px; height:44px; border-radius:10px; background:#EFF6FF; display:flex; align-items:center; justify-content:center; font-size:1.25rem; flex-shrink:0;">
+                  📍
+                </div>
+                <div>
+                  <strong style="color:var(--color-text-primary);">Service Coverage Zone</strong><br>
+                  <span>Daffodil Smart City, Ashulia, Baipayl, Savar</span>
+                  <div style="font-size:0.8rem; color:var(--color-text-muted); margin-top:2px;">Dhaka, Bangladesh</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="alert alert-info">
+            <span class="alert-icon">ℹ️</span>
+            <div>
+              <strong>Looking to register your printing shop?</strong><br>
+              Shop owners can register with their trade license directly on our <a href="shop-owner/register.html">Shop Registration page</a>.
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Send Message Form -->
+        <div>
+          <div class="form-card">
+            <h3 style="font-size: 1.3rem; color: var(--color-primary); margin-bottom: 1rem;">Send Us a Message</h3>
+            <form onsubmit="event.preventDefault(); CampusPrint.toast.success('Message Received!', 'Thank you for reaching out. We will get back to you shortly.'); this.reset();">
+              <div class="form-group">
+                <label class="form-label">Your Name <span class="required">*</span></label>
+                <input type="text" class="form-input" required placeholder="Student or Owner Name" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Phone or Email <span class="required">*</span></label>
+                <input type="text" class="form-input" required placeholder="01XXXXXXXXX or email@domain.com" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Subject</label>
+                <select class="form-select">
+                  <option>Order Assistance</option>
+                  <option>Shop Onboarding Inquiry</option>
+                  <option>Feedback / Suggestion</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Message Details <span class="required">*</span></label>
+                <textarea class="form-textarea" required placeholder="Write your question or feedback..."></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary btn-full btn-lg">Send Message</button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer Placeholder -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Scripts -->
+  <script src="../js/components/navbar.js?v=20261121_2"></script>
+  <script src="../js/components/footer.js"></script>
+</body>
+</html>

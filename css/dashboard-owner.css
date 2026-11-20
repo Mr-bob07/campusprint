@@ -1,0 +1,67 @@
+/* ==========================================================================
+   CampusPrint – Shop Owner Dashboard CSS (css/dashboard-owner.css)
+   ========================================================================== */
+
+.owner-analytics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.chart-card {
+  background: white;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: 1.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.chart-card-title {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Service Popularity Bar */
+.service-stat-item {
+  margin-bottom: 1rem;
+}
+
+.service-stat-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.service-stat-bar-bg {
+  background: var(--color-bg-light);
+  height: 8px;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.service-stat-bar-fill {
+  height: 100%;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+}
+
+@media (max-width: 900px) {
+  .owner-analytics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .owner-analytics-grid {
+    grid-template-columns: 1fr;
+  }
+}

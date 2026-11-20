@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CampusPrint – Your Campus. Your Shop. Your Print.</title>
+  <meta name="description" content="Discover printing shops near your campus, compare prices and order your documents online. CampusPrint – the #1 printing marketplace for university students." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- CampusPrint CSS -->
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/home.css" />
+</head>
+<body class="page-wrapper">
+
+  <!-- ========== NAVBAR ========== -->
+  <div id="navbar-placeholder"></div>
+
+  <!-- ========== MAIN CONTENT ========== -->
+  <main class="main-content">
+
+    <!-- ============================================================
+         SECTION 1: HERO
+    ============================================================ -->
+    <section class="hero-section">
+      <!-- Animated background blobs -->
+      <div class="hero-blob hero-blob-1"></div>
+      <div class="hero-blob hero-blob-2"></div>
+      <div class="hero-blob hero-blob-3"></div>
+
+      <div class="container">
+        <div class="hero-content">
+          <!-- Badge -->
+          <div class="hero-badge animate-fade-in">
+            <span>🎓</span>
+            <span>Built for the DIU–Ashulia Campus Area</span>
+          </div>
+
+          <!-- Headline -->
+          <h1 class="hero-title animate-fade-in delay-100">
+            Your Campus Printing,<br />
+            <span class="hero-title-accent">All in One Place.</span>
+          </h1>
+
+          <!-- Sub-headline -->
+          <p class="hero-subtitle animate-fade-in delay-200">
+            Discover printing shops near your campus, compare prices and order your documents online.
+            Fast, easy, and affordable — just the way students need it.
+          </p>
+
+          <!-- ---- LOCATION SEARCH BAR ---- -->
+          <div class="hero-search animate-fade-in delay-300">
+            <div class="hero-search-inner">
+              <div class="hero-search-field">
+                <span class="hero-search-icon">📍</span>
+                <select id="heroLocation" name="location_id" class="hero-search-select">
+                  <option value="">Select your Location...</option>
+                  <option value="1">Daffodil Smart City</option>
+                  <option value="2">Ashulia</option>
+                  <option value="3">Baipayl</option>
+                  <option value="4">Savar</option>
+                  <option value="5">Hall Area</option>
+                  <option value="6">Model Town</option>
+                </select>
+              </div>
+              <div class="hero-search-divider"></div>
+              <div class="hero-search-field">
+                <span class="hero-search-icon">🔍</span>
+                <input type="text" id="heroSearch" placeholder="Search shop name or service..." class="hero-search-input" />
+              </div>
+              <button class="hero-search-btn" onclick="heroSearch()">
+                <span>Find Shops</span>
+                <span>→</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Quick location pills -->
+          <div class="hero-quick-locations animate-fade-in delay-400">
+            <span class="hero-quick-label">Popular Areas:</span>
+            <button class="hero-location-pill" onclick="quickSearch('1')">Daffodil Smart City</button>
+            <button class="hero-location-pill" onclick="quickSearch('2')">Ashulia</button>
+            <button class="hero-location-pill" onclick="quickSearch('3')">Baipayl</button>
+            <button class="hero-location-pill" onclick="quickSearch('4')">Savar</button>
+          </div>
+        </div>
+
+        <!-- Hero Stats -->
+        <div class="hero-stats animate-fade-in delay-500">
+          <div class="hero-stat">
+            <div class="hero-stat-value">15+</div>
+            <div class="hero-stat-label">Printing Shops</div>
+          </div>
+          <div class="hero-stat-divider"></div>
+          <div class="hero-stat">
+            <div class="hero-stat-value">500+</div>
+            <div class="hero-stat-label">Happy Students</div>
+          </div>
+          <div class="hero-stat-divider"></div>
+          <div class="hero-stat">
+            <div class="hero-stat-value">৳1.50</div>
+            <div class="hero-stat-label">From per Page</div>
+          </div>
+          <div class="hero-stat-divider"></div>
+          <div class="hero-stat">
+            <div class="hero-stat-value">COD</div>
+            <div class="hero-stat-label">Cash on Delivery</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 2: HOW IT WORKS
+    ============================================================ -->
+    <section class="section how-section">
+      <div class="container">
+        <div class="section-header reveal">
+          <div class="section-label">Simple & Fast</div>
+          <h2>Order in Just 3 Simple Steps</h2>
+          <p>Ordering your campus prints with CampusPrint is effortless — quick, reliable, and student-friendly!</p>
+        </div>
+
+        <div class="how-grid">
+          <div class="how-card reveal delay-100">
+            <div class="how-number">01</div>
+            <div class="how-icon">🔍</div>
+            <h3>Find a Shop</h3>
+            <p>Select your campus location and discover nearby printing shops. Compare live rates and verified ratings.</p>
+            <div class="how-arrow">→</div>
+          </div>
+
+          <div class="how-card reveal delay-200">
+            <div class="how-number">02</div>
+            <div class="how-icon">📄</div>
+            <h3>Place Your Order</h3>
+            <p>Upload your PDF document. Choose print type, paper size, and copies. Check instant live pricing.</p>
+            <div class="how-arrow">→</div>
+          </div>
+
+          <div class="how-card reveal delay-300">
+            <div class="how-number">03</div>
+            <div class="how-icon">✅</div>
+            <h3>Collect or Get Delivered</h3>
+            <p>Pick up directly from the shop or request local delivery. Cash on Delivery / Pickup — no online payment needed.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 3: FEATURED SHOPS
+    ============================================================ -->
+    <section class="section section-bg">
+      <div class="container">
+        <div class="section-header reveal">
+          <div class="section-label">Top Rated</div>
+          <h2>Featured Printing Shops</h2>
+          <p>Top-rated printing shops across DIU–Ashulia — trusted by hundreds of campus students daily.</p>
+        </div>
+
+        <div class="shops-grid" id="featuredShopsGrid">
+          <!-- Cards injected by home.js -->
+        </div>
+
+        <div class="section-footer reveal">
+          <a href="pages/find-shops.html" class="btn btn-primary btn-lg">
+            Browse All Shops →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 4: SERVICES
+    ============================================================ -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header reveal">
+          <div class="section-label">Our Services</div>
+          <h2>All Printing &amp; Document Services</h2>
+          <p>From lecture notes and thesis prints to spiral binding and lamination — all in one marketplace.</p>
+        </div>
+
+        <div class="services-grid">
+          <div class="service-card reveal delay-100">
+            <div class="service-card-icon" style="background:linear-gradient(135deg,#EFF6FF,#DBEAFE);">🖨️</div>
+            <h4>B&W Printing</h4>
+            <p>Black &amp; white printing. The most economical choice for assignments, lecture notes, and lab reports.</p>
+            <div class="service-price">From <strong>৳1.50</strong>/page</div>
+          </div>
+
+          <div class="service-card reveal delay-200">
+            <div class="service-card-icon" style="background:linear-gradient(135deg,#FFF7ED,#FFEDD5);">🎨</div>
+            <h4>Color Printing</h4>
+            <p>Full color vibrant printing. Ideal for project submissions, presentations, slides, and posters.</p>
+            <div class="service-price">From <strong>৳5.00</strong>/page</div>
+          </div>
+
+          <div class="service-card reveal delay-300">
+            <div class="service-card-icon" style="background:linear-gradient(135deg,#F0FDF4,#DCFCE7);">📋</div>
+            <h4>Spiral Binding</h4>
+            <p>Give your documents a neat, professional finish. Perfect for thesis books, lab manuals, and reports.</p>
+            <div class="service-price">From <strong>৳20</strong>/book</div>
+          </div>
+
+          <div class="service-card reveal delay-100">
+            <div class="service-card-icon" style="background:linear-gradient(135deg,#FFF1F2,#FFE4E6);">✨</div>
+            <h4>Lamination</h4>
+            <p>Protect your vital papers from wear and tear. Great for certificates, ID cards, and official documents.</p>
+            <div class="service-price">From <strong>৳10</strong>/page</div>
+          </div>
+
+          <div class="service-card reveal delay-200">
+            <div class="service-card-icon" style="background:linear-gradient(135deg,#F5F3FF,#EDE9FE);">📄</div>
+            <h4>A3 Printing</h4>
+            <p>Large format printing on premium A3 paper. Perfect for architectural drawings, engineering sheets, and posters.</p>
+            <div class="service-price">From <strong>৳8.00</strong>/page</div>
+          </div>
+
+          <div class="service-card reveal delay-300">
+            <div class="service-card-icon" style="background:linear-gradient(135deg,#F0F9FF,#E0F2FE);">📚</div>
+            <h4>Double Side Print</h4>
+            <p>Save paper and cut printing expenses in half. Book-style duplex printing for lecture handbooks and notes.</p>
+            <div class="service-price">From <strong>৳2.50</strong>/page</div>
+          </div>
+        </div>
+
+        <div class="section-footer reveal">
+          <a href="pages/services.html" class="btn btn-outline btn-lg">View All Services</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 5: WHY CAMPUSPRINT
+    ============================================================ -->
+    <section class="section why-section">
+      <div class="container">
+        <div class="why-grid">
+          <div class="why-left reveal-left">
+            <div class="section-label">Why CampusPrint?</div>
+            <h2>Designed for Students, Built for Campus Life</h2>
+            <p>Printing before exam hall or assignment submission should not be stressful. CampusPrint simplifies your campus printing — compare vendor rates, calculate exact costs, and pick up without standing in queues.</p>
+
+            <div class="why-features">
+              <div class="why-feature">
+                <div class="why-feature-icon">⚡</div>
+                <div>
+                  <strong>Fast Turnaround</strong>
+                  <p>Orders ready within 30 minutes. Express printing for rush assignment submissions.</p>
+                </div>
+              </div>
+              <div class="why-feature">
+                <div class="why-feature-icon">💰</div>
+                <div>
+                  <strong>Best Campus Rates</strong>
+                  <p>Compare multiple vendor prices side-by-side to choose the most budget-friendly option.</p>
+                </div>
+              </div>
+              <div class="why-feature">
+                <div class="why-feature-icon">🏆</div>
+                <div>
+                  <strong>Shop Loyalty Rewards</strong>
+                  <p>Earn reward points on completed orders. Redeem 5,000 pts for 5% off &amp; 10,000 pts for 10% off!</p>
+                </div>
+              </div>
+              <div class="why-feature">
+                <div class="why-feature-icon">🚚</div>
+                <div>
+                  <strong>Hostel &amp; Doorstep Delivery</strong>
+                  <p>Get orders delivered to your student hall/hostel or opt for free store self-pickup.</p>
+                </div>
+              </div>
+            </div>
+
+            <div style="margin-top:2rem;display:flex;gap:1rem;flex-wrap:wrap;">
+              <a href="pages/customer/register.html" class="btn btn-primary btn-lg">Register Now</a>
+              <a href="pages/find-shops.html" class="btn btn-outline btn-lg">Find Shops</a>
+            </div>
+          </div>
+
+          <div class="why-right reveal-right">
+            <div class="why-visual">
+              <div class="why-card-floating why-card-1">
+                <div class="why-mini-card">
+                  <span>📦</span>
+                  <div>
+                    <div class="why-mini-title">Order #1042</div>
+                    <div class="status-badge status-ready" style="font-size:11px;">Ready for Pickup</div>
+                  </div>
+                </div>
+              </div>
+              <div class="why-card-floating why-card-2">
+                <div class="why-mini-card">
+                  <span>⭐</span>
+                  <div>
+                    <div class="why-mini-title">3,750 Points Earned</div>
+                    <div style="font-size:12px;color:#0284C7;">1,250 more for 5% off!</div>
+                  </div>
+                </div>
+              </div>
+              <div class="why-card-floating why-card-3">
+                <div class="why-mini-card">
+                  <span>💵</span>
+                  <div>
+                    <div class="why-mini-title">Cash on Delivery</div>
+                    <div style="font-size:12px;color:#94A3B8;">No advance payment</div>
+                  </div>
+                </div>
+              </div>
+              <div class="why-center-graphic">
+                <div class="why-graphic-icon">🖨️</div>
+                <div class="why-graphic-text">CampusPrint</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 6: PRICING INFO
+    ============================================================ -->
+    <section class="section section-bg">
+      <div class="container">
+        <div class="section-header reveal">
+          <div class="section-label">Transparent Pricing</div>
+          <h2>Sample Pricing (Demo)</h2>
+          <p>Each printing shop maintains its own custom rates. Below is a sample demo benchmark — check individual shop pages for live rates.</p>
+        </div>
+
+        <div class="pricing-grid">
+          <div class="pricing-card reveal delay-100">
+            <div class="pricing-card-header">
+              <div class="pricing-badge">Most Popular</div>
+              <div class="pricing-icon">🖨️</div>
+              <h3>B&W Print</h3>
+            </div>
+            <div class="pricing-card-body">
+              <div class="pricing-row"><span>A4 Single Side</span><span class="price-val">৳1.50/page</span></div>
+              <div class="pricing-row"><span>A4 Double Side</span><span class="price-val">৳2.50/page</span></div>
+              <div class="pricing-row"><span>A3 Single Side</span><span class="price-val">৳5.00/page</span></div>
+              <div class="pricing-row muted"><span>Spiral Binding</span><span class="price-val">৳20–40</span></div>
+              <div class="pricing-row muted"><span>Lamination (A4)</span><span class="price-val">৳10–15</span></div>
+            </div>
+            <a href="pages/find-shops.html" class="btn btn-primary btn-full">Browse Shops</a>
+          </div>
+
+          <div class="pricing-card reveal delay-200">
+            <div class="pricing-card-header">
+              <div class="pricing-icon">🎨</div>
+              <h3>Color Print</h3>
+            </div>
+            <div class="pricing-card-body">
+              <div class="pricing-row"><span>A4 Single Side</span><span class="price-val">৳5.00/page</span></div>
+              <div class="pricing-row"><span>A4 Double Side</span><span class="price-val">৳8.00/page</span></div>
+              <div class="pricing-row"><span>A3 Single Side</span><span class="price-val">৳15.00/page</span></div>
+              <div class="pricing-row muted"><span>Photo Print (4R)</span><span class="price-val">৳15–25</span></div>
+              <div class="pricing-row muted"><span>Poster Print (A3)</span><span class="price-val">৳30–50</span></div>
+            </div>
+            <a href="pages/find-shops.html" class="btn btn-outline btn-full">Browse Shops</a>
+          </div>
+
+          <div class="pricing-card reveal delay-300">
+            <div class="pricing-card-header">
+              <div class="pricing-icon">🚚</div>
+              <h3>Delivery Charge</h3>
+            </div>
+            <div class="pricing-card-body">
+              <div class="pricing-row highlight"><span>Self Pickup</span><span class="price-val free">FREE ৳0</span></div>
+              <div class="pricing-row"><span>Daffodil Smart City</span><span class="price-val">৳20</span></div>
+              <div class="pricing-row"><span>Ashulia</span><span class="price-val">৳30</span></div>
+              <div class="pricing-row"><span>Baipayl</span><span class="price-val">৳40</span></div>
+              <div class="pricing-row"><span>Savar</span><span class="price-val">৳50</span></div>
+            </div>
+            <div class="pricing-note">* Charge varies per shop</div>
+          </div>
+        </div>
+
+        <div class="pricing-disclaimer reveal">
+          ⚠️ The rates above represent <strong>sample benchmark rates</strong>. Each shop sets its own rates. Please check the shop profile and live calculator before placing your order.
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 7: REVIEWS
+    ============================================================ -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header reveal">
+          <div class="section-label">Student Reviews</div>
+          <h2>What Students Are Saying</h2>
+          <p>Trusted by hundreds of campus students every semester. Here is what they have to say.</p>
+        </div>
+
+        <div class="reviews-grid">
+          <div class="review-card reveal delay-100">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">"Lifesaver service! I submitted my thesis order the night before submission, and it was ready and spiral-bound in just 40 minutes. Absolutely flawless quality."</p>
+            <div class="review-author">
+              <div class="review-avatar">RA</div>
+              <div>
+                <div class="review-name">Rahul Ahmed</div>
+                <div class="review-dept">CSE, 48th Batch – DIU</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="review-card reveal delay-200">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">"Comparing rates used to mean walking from shop to shop. Now I calculate everything from my room. Since it is Cash on Delivery, there is zero risk."</p>
+            <div class="review-author">
+              <div class="review-avatar">FK</div>
+              <div>
+                <div class="review-name">Fatema Khanam</div>
+                <div class="review-dept">BBA, 50th Batch – DIU</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="review-card reveal delay-300">
+            <div class="review-stars">★★★★⭐</div>
+            <p class="review-text">"The loyalty points system is so smart! I regularly order from my favorite shop and collect points. Getting 5% discount on my big semester projects is great."</p>
+            <div class="review-author">
+              <div class="review-avatar">MR</div>
+              <div>
+                <div class="review-name">Mehedi Reza</div>
+                <div class="review-dept">EEE, 49th Batch – DIU</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Overall Rating -->
+        <div class="rating-summary reveal">
+          <div class="rating-big">4.8</div>
+          <div>
+            <div class="rating-stars-big">★★★★★</div>
+            <div class="rating-summary-text">Based on 500+ verified student reviews</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 8: FAQ
+    ============================================================ -->
+    <section class="section section-bg">
+      <div class="container">
+        <div class="section-header reveal">
+          <div class="section-label">FAQ</div>
+          <h2>Frequently Asked Questions</h2>
+          <p>Got questions? Find clear answers to common questions about CampusPrint.</p>
+        </div>
+
+        <div class="faq-list" id="faqList">
+          <div class="faq-item reveal">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              <span>Is CampusPrint free to use?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              Yes! Registering and searching shops on CampusPrint is 100% free. You only pay for your actual printing costs and optional delivery charges when you receive your order.
+            </div>
+          </div>
+
+          <div class="faq-item reveal delay-100">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              <span>How does payment work?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              CampusPrint operates strictly on <strong>Cash on Delivery (COD) and Cash on Pickup</strong>. There are no online payment gateways or advance charges. You pay in cash when collecting your finished prints.
+            </div>
+          </div>
+
+          <div class="faq-item reveal delay-200">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              <span>Can I order from multiple shops in a single order?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              No. Each order is placed with a single printing shop to ensure accurate vendor pricing, custom delivery rates, and vendor fulfillment. If you need prints from different shops, place separate orders.
+            </div>
+          </div>
+
+          <div class="faq-item reveal delay-300">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              <span>How do Loyalty Points work?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              Each shop sets its own loyalty reward rate (e.g. 1 to 2 points per ৳10 spent). Points accumulate once orders are marked paid and completed. 5,000 points redeem for 5% discount and 10,000 points redeem for 10% discount at that specific shop.
+            </div>
+          </div>
+
+          <div class="faq-item reveal">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              <span>How can I register my printing shop on CampusPrint?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              Register as a Shop Owner and submit your shop details and trade license. Following administrative verification (typically within 24–48 hours), your shop will appear live on the marketplace.
+            </div>
+          </div>
+
+          <div class="faq-item reveal delay-100">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              <span>Which campus areas are currently supported?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              Currently, we actively support the DIU–Ashulia campus perimeter, including Daffodil Smart City, Ashulia, Baipayl, Savar, and surrounding student housing zones.
+            </div>
+          </div>
+        </div>
+
+        <div class="section-footer reveal">
+          <a href="pages/faq.html" class="btn btn-outline">View More FAQs</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 9: CTA BANNER
+    ============================================================ -->
+    <section class="cta-section">
+      <div class="cta-blob-1"></div>
+      <div class="cta-blob-2"></div>
+      <div class="container">
+        <div class="cta-content reveal">
+          <div class="cta-icon">🖨️</div>
+          <h2>Get Started with CampusPrint Today!</h2>
+          <p>Create your account in seconds and find the best rated printing shops near your university campus. 100% free to join with zero advance payment.</p>
+          <div class="cta-buttons">
+            <a href="pages/customer/register.html" class="btn btn-white btn-xl">
+              🎓 Student Registration
+            </a>
+            <a href="pages/shop-owner/register.html" class="btn btn-outline-white btn-xl">
+              🏪 Shop Owner Registration
+            </a>
+          </div>
+          <div class="cta-note">
+            <span class="cod-badge" style="background:rgba(255,255,255,0.15);border-color:rgba(255,255,255,0.3);color:white;">💵 Cash on Delivery Only — No Online Payment</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main><!-- /.main-content -->
+
+  <!-- ========== FOOTER ========== -->
+  <div id="footer-placeholder"></div>
+
+  <!-- ========== SCRIPTS ========== -->
+  <script src="js/data/locations.js"></script>
+  <script src="js/data/shops.js"></script>
+  <script src="js/components/navbar.js?v=20261121_2"></script>
+  <script src="js/components/footer.js"></script>
+  <script src="js/home.js"></script>
+</body>
+</html>

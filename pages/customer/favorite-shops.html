@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Favorite Shops – CampusPrint</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../css/global.css" />
+  <link rel="stylesheet" href="../../css/components.css" />
+  <link rel="stylesheet" href="../../css/dashboard-customer.css" />
+</head>
+<body class="page-wrapper" style="background-color: var(--color-bg-light);">
+
+  <!-- Navbar Placeholder -->
+  <div id="navbar-placeholder"></div>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="dashboard-layout">
+
+      <!-- Left Sidebar -->
+      <aside class="sidebar">
+        <div class="sidebar-logo">
+          <div style="font-weight: 700; color: var(--color-primary); font-size: 0.95rem;">Student Portal</div>
+          <div style="font-size: 0.75rem; color: var(--color-text-muted);">CampusPrint DIU</div>
+        </div>
+        <div class="sidebar-section-label">Main Menu</div>
+        <a href="dashboard.html" class="sidebar-link"><span class="sidebar-link-icon">📊</span><span>Dashboard Overview</span></a>
+        <a href="place-order.html" class="sidebar-link"><span class="sidebar-link-icon">🖨️</span><span>Place New Order</span></a>
+        <a href="track-order.html" class="sidebar-link"><span class="sidebar-link-icon">📍</span><span>Track Active Order</span></a>
+        <a href="my-orders.html" class="sidebar-link"><span class="sidebar-link-icon">📦</span><span>My Orders History</span></a>
+        <a href="my-rewards.html" class="sidebar-link"><span class="sidebar-link-icon">🎁</span><span>Bonus Points &amp; Rewards</span></a>
+        <a href="favorite-shops.html" class="sidebar-link active"><span class="sidebar-link-icon">❤️</span><span>Favorite Shops</span></a>
+        <div class="sidebar-section-label" style="margin-top: 1.5rem;">Account</div>
+        <a href="my-profile.html" class="sidebar-link"><span class="sidebar-link-icon">👤</span><span>My Profile</span></a>
+        <button class="sidebar-link" onclick="CampusPrint.auth.logout()" style="width:100%; text-align:left; background:none; border:none; cursor:pointer; color:var(--color-danger);"><span class="sidebar-link-icon">🚪</span><span>Logout</span></button>
+      </aside>
+
+      <!-- Right Content -->
+      <div class="dashboard-content">
+        <div class="dashboard-header">
+          <div>
+            <h1 style="font-size: 1.75rem; color: var(--color-primary); margin-bottom: 0.25rem;">My Favorite Shops</h1>
+            <p>Your saved printing vendors for rapid assignment ordering</p>
+          </div>
+          <a href="../find-shops.html" class="btn btn-outline">
+            <span>🔍</span> <span>Explore More Shops</span>
+          </a>
+        </div>
+
+        <div class="shops-grid" style="grid-template-columns: repeat(2, 1fr);">
+
+          <div class="shop-card">
+            <div class="shop-card-image-placeholder">🖨️</div>
+            <div class="shop-card-body">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.4rem;">
+                <h3 class="shop-card-name">Smart Print Point</h3>
+                <span class="status-badge status-ready">Open</span>
+              </div>
+              <div class="shop-card-address">
+                <span>📍</span> <span>Gate 1, Daffodil Smart City, Ashulia</span>
+              </div>
+              <div class="shop-card-meta">
+                <div class="shop-card-rating">
+                  <span class="stars">★★★★★</span>
+                  <span>4.9</span>
+                  <span class="text-muted">(142)</span>
+                </div>
+                <div class="shop-card-price">B&W from <strong>৳1.50</strong></div>
+              </div>
+              <div class="shop-card-footer">
+                <span class="text-sm text-muted">⏱️ 20-30 mins</span>
+                <a href="place-order.html?shop_id=1" class="btn btn-primary btn-sm">Order Now</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="shop-card">
+            <div class="shop-card-image-placeholder">🖨️</div>
+            <div class="shop-card-body">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.4rem;">
+                <h3 class="shop-card-name">Campus Xerox &amp; Digital Lab</h3>
+                <span class="status-badge status-ready">Open</span>
+              </div>
+              <div class="shop-card-address">
+                <span>📍</span> <span>Opposite Scholar Garden, DIU</span>
+              </div>
+              <div class="shop-card-meta">
+                <div class="shop-card-rating">
+                  <span class="stars">★★★★★</span>
+                  <span>4.8</span>
+                  <span class="text-muted">(98)</span>
+                </div>
+                <div class="shop-card-price">B&W from <strong>৳1.50</strong></div>
+              </div>
+              <div class="shop-card-footer">
+                <span class="text-sm text-muted">⏱️ 25-35 mins</span>
+                <a href="place-order.html?shop_id=2" class="btn btn-primary btn-sm">Order Now</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer Placeholder -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Scripts -->
+  <script src="../../js/utils/auth.js"></script>
+  <script src="../../js/components/navbar.js?v=20261121_2"></script>
+  <script src="../../js/components/footer.js"></script>
+</body>
+</html>

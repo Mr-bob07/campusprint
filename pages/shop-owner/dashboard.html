@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop Owner Dashboard – CampusPrint</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../css/global.css" />
+  <link rel="stylesheet" href="../../css/components.css" />
+  <link rel="stylesheet" href="../../css/dashboard-owner.css" />
+</head>
+<body class="page-wrapper" style="background-color: var(--color-bg-light);">
+
+  <!-- Navbar Placeholder -->
+  <div id="navbar-placeholder"></div>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="dashboard-layout">
+
+      <!-- Left Sidebar -->
+      <aside class="sidebar">
+        <div class="sidebar-logo">
+          <div style="font-weight: 700; color: var(--color-primary); font-size: 0.95rem;">Smart Print Point</div>
+          <div style="font-size: 0.75rem; color: #10B981; font-weight: 600;">● Verified Partner Shop</div>
+        </div>
+
+        <div class="sidebar-section-label">Management</div>
+        <a href="dashboard.html" class="sidebar-link active">
+          <span class="sidebar-link-icon">📊</span>
+          <span>Dashboard Overview</span>
+        </a>
+        <a href="manage-orders.html" class="sidebar-link">
+          <span class="sidebar-link-icon">📋</span>
+          <span>Customer Orders</span>
+          <span class="sidebar-link-badge">1</span>
+        </a>
+        <a href="manage-services.html" class="sidebar-link">
+          <span class="sidebar-link-icon">🏷️</span>
+          <span>Pricing &amp; Services</span>
+        </a>
+        <a href="delivery-settings.html" class="sidebar-link">
+          <span class="sidebar-link-icon">🚚</span>
+          <span>Delivery Coverage</span>
+        </a>
+        <a href="sales-analytics.html" class="sidebar-link">
+          <span class="sidebar-link-icon">📈</span>
+          <span>Sales &amp; Analytics</span>
+        </a>
+        <a href="manage-loyalty.html" class="sidebar-link">
+          <span class="sidebar-link-icon">🎁</span>
+          <span>Loyalty Rewards</span>
+        </a>
+        <a href="manage-discounts.html" class="sidebar-link">
+          <span class="sidebar-link-icon">🏷️</span>
+          <span>Discount Coupons</span>
+        </a>
+
+        <div class="sidebar-section-label" style="margin-top: 1.5rem;">Shop Settings</div>
+        <a href="shop-profile.html" class="sidebar-link">
+          <span class="sidebar-link-icon">🏪</span>
+          <span>Shop Profile &amp; Hours</span>
+        </a>
+        <button class="sidebar-link" onclick="CampusPrint.auth.logout()" style="width:100%; text-align:left; background:none; border:none; cursor:pointer; color:var(--color-danger);">
+          <span class="sidebar-link-icon">🚪</span>
+          <span>Logout</span>
+        </button>
+      </aside>
+
+      <!-- Right Content -->
+      <div class="dashboard-content">
+
+        <!-- Header Greeting & Status -->
+        <div class="dashboard-header">
+          <div>
+            <h1 style="font-size: 1.75rem; color: var(--color-primary); margin-bottom: 0.25rem;">Smart Print Point – Overview</h1>
+            <p>Gate 1, Daffodil Smart City • Owner: Md. Rafiqul Islam</p>
+          </div>
+          <div style="display:flex; align-items:center; gap: 10px;">
+            <span class="status-badge status-ready">🟢 Shop is OPEN</span>
+            <a href="manage-orders.html" class="btn btn-primary">View Orders</a>
+          </div>
+        </div>
+
+        <!-- 4 Core Metrics -->
+        <div class="owner-analytics-grid">
+          <div class="stat-card">
+            <div class="stat-card-icon green">💰</div>
+            <div class="stat-card-value">৳4,820</div>
+            <div class="stat-card-label">Monthly Verified Sales (COD)</div>
+            <div class="stat-card-change up" style="font-size:11px;">* Verified paid orders only</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-card-icon blue">📦</div>
+            <div class="stat-card-value">28</div>
+            <div class="stat-card-label">Total Orders This Month</div>
+            <div class="stat-card-change up">↑ 14% vs last week</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-card-icon yellow">⏳</div>
+            <div class="stat-card-value">1</div>
+            <div class="stat-card-label">Pending / Ready Orders</div>
+            <div style="font-size:11px; color:#D97706; margin-top:4px;">Requires attention</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-card-icon purple">⭐</div>
+            <div class="stat-card-value">4.9</div>
+            <div class="stat-card-label">Customer Rating (142 reviews)</div>
+            <div style="font-size:11px; color:var(--color-text-muted); margin-top:4px;">DIU Top Rated Vendor</div>
+          </div>
+        </div>
+
+        <!-- Incoming & Active Orders -->
+        <div class="card card-padded mb-6">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 1.25rem;">
+            <h3 style="font-size: 1.2rem; color: var(--color-primary); margin:0;">Active Orders for Smart Print Point</h3>
+            <a href="manage-orders.html" class="btn btn-outline btn-sm">Manage All Orders</a>
+          </div>
+
+          <div class="table-wrapper">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Customer</th>
+                  <th>Document</th>
+                  <th>Specs</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                  <th>COD Payment</th>
+                  <th>Quick Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>#CP-1049</strong></td>
+                  <td>Tanzim Ahmed<br><span style="font-size:11px; color:var(--color-text-muted);">01712345678</span></td>
+                  <td>Algorithms_Lab_Report_04.pdf</td>
+                  <td>Color A4 • 12 pgs (1 copy) • Tape Binding</td>
+                  <td><strong>৳75.00</strong></td>
+                  <td><span class="status-badge status-ready">READY</span></td>
+                  <td><span class="badge badge-warning">Unpaid (COD)</span></td>
+                  <td>
+                    <button class="btn btn-success btn-sm" onclick="markOrderPaid('CP-1049')">
+                      ✓ Mark Paid
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>#CP-1042</strong></td>
+                  <td>Tanzim Ahmed<br><span style="font-size:11px; color:var(--color-text-muted);">01712345678</span></td>
+                  <td>CSE412_Thesis.pdf</td>
+                  <td>B&W A4 • 48 pgs (2 copies) • Spiral</td>
+                  <td><strong>৳190.00</strong></td>
+                  <td><span class="status-badge status-delivered">COMPLETED</span></td>
+                  <td><span class="badge badge-success">Paid</span></td>
+                  <td>
+                    <span style="font-size:12px; color:var(--color-success); font-weight:600;">Done</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Popular Services Breakdown -->
+        <div class="grid-2 gap-6">
+          <div class="chart-card">
+            <div class="chart-card-title">
+              <span>Top Selling Services</span>
+              <span style="font-size:12px; font-weight:400; color:var(--color-text-muted);">This Month</span>
+            </div>
+
+            <div class="service-stat-item">
+              <div class="service-stat-meta"><span>B&amp;W Document Printing</span><span>180 orders</span></div>
+              <div class="service-stat-bar-bg"><div class="service-stat-bar-fill" style="width: 85%;"></div></div>
+            </div>
+
+            <div class="service-stat-item">
+              <div class="service-stat-meta"><span>Color Slide &amp; Report Print</span><span>75 orders</span></div>
+              <div class="service-stat-bar-bg"><div class="service-stat-bar-fill" style="width: 50%;"></div></div>
+            </div>
+
+            <div class="service-stat-item">
+              <div class="service-stat-meta"><span>Spiral &amp; Plastic Binding</span><span>40 orders</span></div>
+              <div class="service-stat-bar-bg"><div class="service-stat-bar-fill" style="width: 32%;"></div></div>
+            </div>
+
+            <div class="service-stat-item">
+              <div class="service-stat-meta"><span>Thesis Hardcover Binding</span><span>18 orders</span></div>
+              <div class="service-stat-bar-bg"><div class="service-stat-bar-fill" style="width: 15%;"></div></div>
+            </div>
+          </div>
+
+          <div class="chart-card">
+            <div class="chart-card-title">
+              <span>Quick Vendor Shortcuts</span>
+            </div>
+            <div style="display:flex; flex-direction:column; gap: 10px;">
+              <a href="manage-services.html" class="btn btn-outline btn-full" style="justify-content:flex-start;">
+                🏷️ Update Printing Prices (B&amp;W / Color)
+              </a>
+              <a href="delivery-settings.html" class="btn btn-outline btn-full" style="justify-content:flex-start;">
+                🚚 Adjust Delivery Area Charges
+              </a>
+              <a href="manage-loyalty.html" class="btn btn-outline btn-full" style="justify-content:flex-start;">
+                🎁 Configure Shop Loyalty Reward Rates
+              </a>
+              <a href="shop-profile.html" class="btn btn-outline btn-full" style="justify-content:flex-start;">
+                🕒 Update Shop Opening Hours
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer Placeholder -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Scripts -->
+  <script src="../../js/utils/auth.js"></script>
+  <script src="../../js/components/navbar.js?v=20261121_2"></script>
+  <script src="../../js/components/footer.js"></script>
+  <script>
+    function markOrderPaid(orderId) {
+      alert(`Payment for order #${orderId} marked as RECEIVED in Cash!\nCustomer loyalty points have been accredited.`);
+      window.location.reload();
+    }
+  </script>
+</body>
+</html>

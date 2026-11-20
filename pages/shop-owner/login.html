@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop Owner Login – CampusPrint</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../css/global.css" />
+  <link rel="stylesheet" href="../../css/components.css" />
+</head>
+<body class="page-wrapper" style="background-color: var(--color-bg-light);">
+
+  <!-- Navbar Placeholder -->
+  <div id="navbar-placeholder"></div>
+
+  <!-- Main Content -->
+  <main class="main-content" style="display:flex; align-items:center; justify-content:center; padding: 4rem 1rem;">
+    <div style="width: 100%; max-width: 440px;">
+
+      <!-- Role Switcher Segmented Control -->
+      <div style="display: flex; background: #E2E8F0; padding: 4px; border-radius: 12px; margin-bottom: 1.25rem; gap: 4px;">
+        <a href="../customer/login.html" style="flex:1; text-align:center; padding: 8px 10px; font-size: 0.825rem; font-weight: 600; border-radius: 8px; text-decoration: none; color: #64748B;">🎓 Student</a>
+        <a href="login.html" style="flex:1; text-align:center; padding: 8px 10px; font-size: 0.825rem; font-weight: 700; border-radius: 8px; text-decoration: none; color: #1E3A8A; background: #FFFFFF; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">🏪 Shop Owner</a>
+        <a href="../admin/login.html" style="flex:1; text-align:center; padding: 8px 10px; font-size: 0.825rem; font-weight: 600; border-radius: 8px; text-decoration: none; color: #64748B;">🛡️ Admin</a>
+      </div>
+
+      <div class="form-card">
+        <div style="text-align: center; margin-bottom: 2rem;">
+          <div style="width:52px; height:52px; border-radius:14px; background:linear-gradient(135deg,#1E3A8A,#0284C7); display:flex; align-items:center; justify-content:center; color:white; font-size:24px; margin: 0 auto 1rem;">
+            🏪
+          </div>
+          <h1 style="font-size: 1.75rem; color: var(--color-primary); margin-bottom: 0.35rem;">Shop Owner Portal</h1>
+          <p style="font-size: 0.875rem; color: var(--color-text-secondary);">Manage your printing orders, prices, and monthly earnings</p>
+        </div>
+
+        <!-- 1-Click Demo Quick Fill -->
+        <div style="background: #EFF6FF; border: 1px dashed #93C5FD; border-radius: 10px; padding: 12px; margin-bottom: 1.5rem; text-align: center;">
+          <div style="font-size: 0.75rem; font-weight: 700; color: #1E40AF; text-transform: uppercase; margin-bottom: 6px;">Testing Shortcut</div>
+          <button type="button" class="btn btn-primary btn-sm btn-full" onclick="CampusPrint.auth.demoLogin('shop_owner')">
+            ⚡ 1-Click Demo Shop Owner Login (Smart Print Point)
+          </button>
+        </div>
+
+        <form onsubmit="handleOwnerLogin(event)">
+          <div class="form-group">
+            <label class="form-label">Shop Owner Email / Phone <span class="required">*</span></label>
+            <div class="input-group">
+              <span class="input-icon">✉️</span>
+              <input type="text" name="email" id="ownerEmail" class="form-input" required placeholder="smartprint.diu@gmail.com" value="smartprint.diu@gmail.com" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 6px;">
+              <label class="form-label" style="margin-bottom:0;">Password <span class="required">*</span></label>
+              <a href="#" style="font-size:0.75rem; color:var(--color-accent);">Forgot password?</a>
+            </div>
+            <div class="input-group">
+              <span class="input-icon">🔒</span>
+              <input type="password" name="password" id="ownerPassword" class="form-input" required placeholder="••••••••" value="demo1234" />
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-full btn-lg mb-4">
+            Enter Owner Dashboard
+          </button>
+        </form>
+
+        <div style="text-align: center; font-size: 0.875rem; color: var(--color-text-secondary); border-top: 1px solid var(--color-border); padding-top: 1.25rem;">
+          Want to register a new printing shop? <a href="register.html" style="font-weight: 600; color: var(--color-primary);">Register here</a>
+        </div>
+
+        <div style="text-align: center; margin-top: 1rem; font-size: 0.8rem; display:flex; flex-direction:column; gap:6px;">
+          <a href="../customer/login.html" style="color: var(--color-text-muted);">Are you a student? <strong>Student Login here →</strong></a>
+          <a href="../admin/login.html" style="color: var(--color-accent); font-weight:600;">🛡️ Platform Administrator? <strong>Admin Login here →</strong></a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer Placeholder -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Scripts -->
+  <script src="../../js/utils/auth.js"></script>
+  <script src="../../js/components/navbar.js?v=20261121_2"></script>
+  <script src="../../js/components/footer.js"></script>
+  <script>
+    function handleOwnerLogin(e) {
+      e.preventDefault();
+      CampusPrint.auth.setSession({
+        id: 201,
+        name: "Md. Rafiqul Islam",
+        email: "smartprint.diu@gmail.com",
+        phone: "01711223344",
+        role: "shop_owner",
+        shop_id: 1,
+        shop_name: "Smart Print Point"
+      });
+      CampusPrint.toast.success("Owner Login Success!", "Loading your shop orders & analytics...");
+      setTimeout(() => {
+        window.location.href = "dashboard.html";
+      }, 700);
+    }
+  </script>
+</body>
+</html>

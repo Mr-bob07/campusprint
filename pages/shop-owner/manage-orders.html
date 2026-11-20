@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manage Customer Orders – CampusPrint</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../css/global.css" />
+  <link rel="stylesheet" href="../../css/components.css" />
+  <link rel="stylesheet" href="../../css/dashboard-owner.css" />
+</head>
+<body class="page-wrapper" style="background-color: var(--color-bg-light);">
+
+  <!-- Navbar Placeholder -->
+  <div id="navbar-placeholder"></div>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="dashboard-layout">
+
+      <!-- Left Sidebar -->
+      <aside class="sidebar">
+        <div class="sidebar-logo">
+          <div style="font-weight: 700; color: var(--color-primary); font-size: 0.95rem;">Smart Print Point</div>
+          <div style="font-size: 0.75rem; color: #10B981; font-weight: 600;">● Verified Partner Shop</div>
+        </div>
+        <div class="sidebar-section-label">Management</div>
+        <a href="dashboard.html" class="sidebar-link"><span class="sidebar-link-icon">📊</span><span>Dashboard Overview</span></a>
+        <a href="manage-orders.html" class="sidebar-link active"><span class="sidebar-link-icon">📋</span><span>Customer Orders</span></a>
+        <a href="manage-services.html" class="sidebar-link"><span class="sidebar-link-icon">🏷️</span><span>Pricing &amp; Services</span></a>
+        <a href="delivery-settings.html" class="sidebar-link"><span class="sidebar-link-icon">🚚</span><span>Delivery Coverage</span></a>
+        <a href="sales-analytics.html" class="sidebar-link"><span class="sidebar-link-icon">📈</span><span>Sales &amp; Analytics</span></a>
+        <a href="manage-loyalty.html" class="sidebar-link"><span class="sidebar-link-icon">🎁</span><span>Loyalty Rewards</span></a>
+        <a href="manage-discounts.html" class="sidebar-link"><span class="sidebar-link-icon">🏷️</span><span>Discount Coupons</span></a>
+        <div class="sidebar-section-label" style="margin-top: 1.5rem;">Shop Settings</div>
+        <a href="shop-profile.html" class="sidebar-link"><span class="sidebar-link-icon">🏪</span><span>Shop Profile &amp; Hours</span></a>
+        <button class="sidebar-link" onclick="CampusPrint.auth.logout()" style="width:100%; text-align:left; background:none; border:none; cursor:pointer; color:var(--color-danger);"><span class="sidebar-link-icon">🚪</span><span>Logout</span></button>
+      </aside>
+
+      <!-- Right Content -->
+      <div class="dashboard-content">
+        <div class="dashboard-header">
+          <div>
+            <h1 style="font-size: 1.75rem; color: var(--color-primary); margin-bottom: 0.25rem;">Incoming Customer Orders</h1>
+            <p>Accept new requests, update printing progress, and mark COD payments received</p>
+          </div>
+        </div>
+
+        <div class="card card-padded">
+          <div class="table-wrapper">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Customer</th>
+                  <th>Document</th>
+                  <th>Specifications</th>
+                  <th>Total</th>
+                  <th>Status</th>
+                  <th>COD Payment</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="ownerOrdersTableBody">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer Placeholder -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Scripts -->
+  <script src="../../js/data/orders.js"></script>
+  <script src="../../js/utils/auth.js"></script>
+  <script src="../../js/components/navbar.js?v=20261121_2"></script>
+  <script src="../../js/components/footer.js"></script>
+  <script>
+    function renderOwnerOrders() {
+      let orders = (typeof window.CP_ORDERS !== 'undefined') ? window.CP_ORDERS : [];
+      try {
+        const saved = localStorage.getItem('cp_orders');
+        if (saved) orders = JSON.parse(saved);
+      } catch (e) {}
+
+      // Filter to Smart Print Point (shop id 1)
+      const shopOrders = orders.filter(o => o.shop_id === 1 || o.shop_name.includes("Smart"));
+      const tbody = document.getElementById('ownerOrdersTableBody');
+      if (!tbody) return;
+
+      tbody.innerHTML = shopOrders.map(order => {
+        const isPaid = order.payment_status === 'paid';
+        const payBadge = isPaid 
+          ? `<span class="badge badge-success">✓ Paid in Cash</span>` 
+          : `<span class="badge badge-warning">COD Due</span>`;
+
+        let actionButtons = `
+          <div style="display:flex; flex-direction:column; gap:4px;">
+            <select class="form-select" style="padding:4px 22px 4px 8px; font-size:12px;" onchange="updateOrderStatus('${order.id}', this.value)">
+              <option value="pending" ${order.order_status === 'pending' ? 'selected' : ''}>Pending</option>
+              <option value="accepted" ${order.order_status === 'accepted' ? 'selected' : ''}>Accept</option>
+              <option value="processing" ${order.order_status === 'processing' ? 'selected' : ''}>Printing</option>
+              <option value="ready" ${order.order_status === 'ready' ? 'selected' : ''}>Ready</option>
+              <option value="completed" ${order.order_status === 'completed' ? 'selected' : ''}>Completed</option>
+              <option value="cancelled" ${order.order_status === 'cancelled' ? 'selected' : ''}>Reject / Cancel</option>
+            </select>
+        `;
+
+        if (!isPaid) {
+          actionButtons += `
+            <button class="btn btn-success btn-sm" style="font-size:11px; padding:3px 8px;" onclick="markPaymentPaid('${order.id}')">
+              Mark Paid (COD)
+            </button>
+          `;
+        }
+
+        actionButtons += `</div>`;
+
+        return `
+          <tr>
+            <td><strong>#${order.id}</strong><br><span style="font-size:11px; color:var(--color-text-muted);">${order.created_at}</span></td>
+            <td><strong>${order.customer_name}</strong><br><a href="tel:${order.customer_phone}" style="font-size:11px;">📞 ${order.customer_phone}</a></td>
+            <td><span style="font-weight:600;">${order.document_name}</span><br><span style="font-size:11px; color:var(--color-accent);">[Download PDF]</span></td>
+            <td style="font-size:12px;">
+              ${order.print_type.toUpperCase()} • ${order.paper_size} (${order.print_side})<br>
+              ${order.pages} pgs × ${order.copies} set(s)<br>
+              <strong>${order.binding || 'No Binding'}</strong>
+            </td>
+            <td><strong style="font-size:1.05rem; color:var(--color-primary);">৳${order.total_payable.toFixed(2)}</strong></td>
+            <td><span class="status-badge status-${order.order_status}">${order.order_status.toUpperCase()}</span></td>
+            <td>${payBadge}</td>
+            <td>${actionButtons}</td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function updateOrderStatus(orderId, newStatus) {
+      let orders = JSON.parse(localStorage.getItem('cp_orders') || '[]');
+      const target = orders.find(o => o.id === orderId);
+      if (target) {
+        target.order_status = newStatus;
+        localStorage.setItem('cp_orders', JSON.stringify(orders));
+        CampusPrint.toast.success("Order Updated", `Order #${orderId} marked as ${newStatus.toUpperCase()}`);
+        renderOwnerOrders();
+      }
+    }
+
+    function markPaymentPaid(orderId) {
+      let orders = JSON.parse(localStorage.getItem('cp_orders') || '[]');
+      const target = orders.find(o => o.id === orderId);
+      if (target) {
+        target.payment_status = 'paid';
+        // Accredit loyalty points on paid completion
+        target.loyalty_points_earned = Math.floor((target.total_payable / 10) * 2.0);
+        localStorage.setItem('cp_orders', JSON.stringify(orders));
+        CampusPrint.toast.success("Payment Received!", `Cash payment for #${orderId} verified. Customer awarded ${target.loyalty_points_earned} loyalty points.`);
+        renderOwnerOrders();
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', renderOwnerOrders);
+  </script>
+</body>
+</html>

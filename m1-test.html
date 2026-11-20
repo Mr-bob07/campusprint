@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CampusPrint – Design System Test (M1)</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- CampusPrint CSS -->
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/components.css" />
+
+  <style>
+    /* Test-page-only styles */
+    .test-section { padding: 3rem 0; }
+    .test-label {
+      font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.1em; color: var(--color-accent); margin-bottom: 1rem;
+      padding-bottom: 0.5rem; border-bottom: 2px solid var(--color-border);
+    }
+    .swatch-grid { display: flex; flex-wrap: wrap; gap: 1rem; }
+    .swatch {
+      width: 100px; border-radius: 10px; overflow: hidden;
+      border: 1px solid var(--color-border); font-size: 11px;
+    }
+    .swatch-color { height: 60px; }
+    .swatch-label { padding: 6px; text-align: center; font-size: 10px; color: var(--color-text-secondary); }
+    .component-row { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
+  </style>
+</head>
+<body class="page-wrapper">
+
+  <!-- Navbar -->
+  <div id="navbar-placeholder"></div>
+
+  <!-- Main -->
+  <main class="main-content">
+
+    <!-- HERO PREVIEW -->
+    <div class="gradient-hero" style="padding:5rem 0;text-align:center;color:white;">
+      <div class="container">
+        <div class="section-label" style="background:rgba(255,255,255,0.15);color:#38BDF8;border-color:rgba(255,255,255,0.2);">
+          M1 Design System — Live Preview
+        </div>
+        <h1 style="color:white;margin:1.5rem 0 1rem;font-size:3rem;">
+          CampusPrint <span class="gradient-text" style="-webkit-text-fill-color:#38BDF8;">Design System</span>
+        </h1>
+        <p style="color:rgba(255,255,255,0.75);max-width:600px;margin:0 auto 2rem;">
+          All reusable components, colors, typography, buttons, cards, forms and utilities
+          that will power every page of CampusPrint.
+        </p>
+        <div class="component-row" style="justify-content:center;">
+          <button class="btn btn-white btn-lg">🎨 Design System</button>
+          <button class="btn btn-accent btn-lg">🖨️ CampusPrint</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <!-- ======== COLOR PALETTE ======== -->
+      <div class="test-section">
+        <div class="test-label">1. Color Palette</div>
+        <div class="swatch-grid">
+          <div class="swatch"><div class="swatch-color" style="background:#0F172A;"></div><div class="swatch-label">Primary 900<br>#0F172A</div></div>
+          <div class="swatch"><div class="swatch-color" style="background:#1E3A8A;"></div><div class="swatch-label">Primary 700<br>#1E3A8A</div></div>
+          <div class="swatch"><div class="swatch-color" style="background:#2563EB;"></div><div class="swatch-label">Primary 500<br>#2563EB</div></div>
+          <div class="swatch"><div class="swatch-color" style="background:#0284C7;"></div><div class="swatch-label">Accent 600<br>#0284C7</div></div>
+          <div class="swatch"><div class="swatch-color" style="background:#38BDF8;"></div><div class="swatch-label">Accent 400<br>#38BDF8</div></div>
+          <div class="swatch"><div class="swatch-color" style="background:#10B981;"></div><div class="swatch-label">Success<br>#10B981</div></div>
+          <div class="swatch"><div class="swatch-color" style="background:#F59E0B;"></div><div class="swatch-label">Warning<br>#F59E0B</div></div>
+          <div class="swatch"><div class="swatch-color" style="background:#EF4444;"></div><div class="swatch-label">Danger<br>#EF4444</div></div>
+          <div class="swatch"><div class="swatch-color" style="background:#F8FAFC;border:1px solid #E2E8F0;"></div><div class="swatch-label">BG Light<br>#F8FAFC</div></div>
+        </div>
+      </div>
+
+      <!-- ======== TYPOGRAPHY ======== -->
+      <div class="test-section">
+        <div class="test-label">2. Typography (Inter + Poppins)</div>
+        <h1>Heading 1 — Poppins ExtraBold (60px)</h1>
+        <h2>Heading 2 — Poppins Bold (48px)</h2>
+        <h3>Heading 3 — Poppins Bold (36px)</h3>
+        <h4>Heading 4 — Poppins Bold (30px)</h4>
+        <h5>Heading 5 — Poppins Bold (24px)</h5>
+        <p style="margin-top:1rem;">Body text — Inter Regular (16px). CampusPrint is a multi-vendor online printing marketplace tailored for university students in the DIU–Ashulia area. Discover printing shops near your campus, compare prices, and order your documents online.</p>
+        <p class="text-muted text-sm" style="margin-top:0.5rem;">Small muted text — Inter Regular (14px). Used for captions and hints.</p>
+      </div>
+
+      <!-- ======== BUTTONS ======== -->
+      <div class="test-section">
+        <div class="test-label">3. Buttons</div>
+        <div class="component-row">
+          <button class="btn btn-primary">Primary</button>
+          <button class="btn btn-accent">Accent</button>
+          <button class="btn btn-outline">Outline</button>
+          <button class="btn btn-outline-accent">Outline Accent</button>
+          <button class="btn btn-ghost">Ghost</button>
+          <button class="btn btn-success">Success</button>
+          <button class="btn btn-danger">Danger</button>
+          <button class="btn btn-primary" disabled>Disabled</button>
+        </div>
+        <div class="component-row" style="margin-top:1rem;">
+          <button class="btn btn-primary btn-sm">Small</button>
+          <button class="btn btn-primary">Default</button>
+          <button class="btn btn-primary btn-lg">Large</button>
+          <button class="btn btn-primary btn-xl">Extra Large</button>
+        </div>
+        <div style="margin-top:1rem;">
+          <button class="btn btn-primary btn-full">Full Width Button</button>
+        </div>
+      </div>
+
+      <!-- ======== BADGES ======== -->
+      <div class="test-section">
+        <div class="test-label">4. Badges & Order Status</div>
+        <div class="component-row">
+          <span class="badge badge-primary">Primary</span>
+          <span class="badge badge-accent">Accent</span>
+          <span class="badge badge-success">Success</span>
+          <span class="badge badge-warning">Warning</span>
+          <span class="badge badge-danger">Danger</span>
+          <span class="badge badge-gray">Gray</span>
+          <span class="badge badge-purple">Purple</span>
+        </div>
+        <div class="component-row" style="margin-top:1rem;">
+          <span class="status-badge status-pending">Pending</span>
+          <span class="status-badge status-accepted">Accepted</span>
+          <span class="status-badge status-processing">Processing</span>
+          <span class="status-badge status-ready">Ready</span>
+          <span class="status-badge status-delivered">Delivered</span>
+          <span class="status-badge status-cancelled">Cancelled</span>
+          <span class="status-badge status-paid">Paid</span>
+        </div>
+        <div class="component-row" style="margin-top:1rem;">
+          <span class="tag">🖨️ B&amp;W Print</span>
+          <span class="tag">🎨 Color Print</span>
+          <span class="tag">📄 A4 Paper</span>
+          <span class="tag">📋 Spiral Binding</span>
+          <span class="cod-badge">💵 Cash on Delivery</span>
+        </div>
+      </div>
+
+      <!-- ======== CARDS ======== -->
+      <div class="test-section">
+        <div class="test-label">5. Cards</div>
+        <div class="grid-3 gap-6">
+
+          <!-- Shop Card Preview -->
+          <div class="shop-card">
+            <div class="shop-card-image-placeholder">🖨️</div>
+            <div class="shop-card-body">
+              <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:0.5rem;">
+                <div class="shop-card-name">Smart Print Center</div>
+                <span class="status-badge status-ready" style="font-size:10px;">Open</span>
+              </div>
+              <div class="shop-card-address">📍 Daffodil Smart City, Ashulia</div>
+              <div class="shop-card-meta">
+                <div class="shop-card-rating">
+                  <span class="stars">★★★★★</span>
+                  <span>4.8</span>
+                  <span class="text-muted">(124)</span>
+                </div>
+                <div class="shop-card-price">B&amp;W from <strong>৳1.50</strong></div>
+              </div>
+              <div class="shop-card-tags">
+                <span class="tag">🖨️ B&amp;W</span>
+                <span class="tag">🎨 Color</span>
+                <span class="tag">📋 Binding</span>
+              </div>
+              <div class="shop-card-footer">
+                <span class="text-sm text-muted">⏱️ 30–45 min</span>
+                <button class="btn btn-primary btn-sm">View Shop</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Stat Card Preview -->
+          <div>
+            <div class="stat-card">
+              <div class="stat-card-icon blue">📦</div>
+              <div class="stat-card-value">248</div>
+              <div class="stat-card-label">Total Orders This Month</div>
+              <div class="stat-card-change up">↑ 12% from last month</div>
+            </div>
+          </div>
+
+          <!-- General Card -->
+          <div class="card card-padded">
+            <div class="section-label" style="margin-bottom:0.75rem;">Featured</div>
+            <h4 style="margin-bottom:0.5rem;">General Purpose Card</h4>
+            <p style="font-size:0.875rem;">This card pattern is used throughout the site for featured content, service highlights, and promotional blocks.</p>
+            <div style="margin-top:1.25rem;">
+              <button class="btn btn-outline btn-sm">Learn More</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ======== FORMS ======== -->
+      <div class="test-section">
+        <div class="test-label">6. Form Components</div>
+        <div class="form-card" style="max-width:600px;">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Full Name <span class="required">*</span></label>
+              <div class="input-group">
+                <span class="input-icon">👤</span>
+                <input type="text" class="form-input" name="full_name" placeholder="Enter your full name" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Phone Number <span class="required">*</span></label>
+              <div class="input-group">
+                <span class="input-icon">📞</span>
+                <input type="tel" class="form-input" name="phone" placeholder="01XXXXXXXXX" />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Email Address <span class="optional">(optional)</span></label>
+            <input type="email" class="form-input" name="email" placeholder="your@email.com" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Select Location <span class="required">*</span></label>
+            <select class="form-select" name="location_id">
+              <option value="">Choose your location...</option>
+              <option value="1">Daffodil Smart City</option>
+              <option value="2">Ashulia</option>
+              <option value="3">Baipayl</option>
+              <option value="4">Savar</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Error State Example</label>
+            <input type="text" class="form-input error" value="Invalid input" />
+            <div class="form-error">⚠️ This field has an error message.</div>
+          </div>
+
+          <div class="form-group">
+            <div class="file-upload-area" onclick="document.getElementById('fileInput').click()">
+              <input type="file" id="fileInput" name="document" accept=".pdf" style="display:none;" />
+              <div class="file-upload-icon">📄</div>
+              <div class="file-upload-text"><strong>Click to upload</strong> or drag and drop</div>
+              <div class="file-upload-hint">PDF files only • Max size 20MB</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="form-check">
+              <input type="checkbox" id="agree" name="agree" />
+              <label class="form-check-label" for="agree">
+                I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+              </label>
+            </div>
+          </div>
+
+          <button class="btn btn-primary btn-full btn-lg">Submit Form</button>
+        </div>
+      </div>
+
+      <!-- ======== STEP INDICATOR ======== -->
+      <div class="test-section">
+        <div class="test-label">7. Step Indicator (Shop Registration)</div>
+        <div class="step-indicator" style="max-width:500px;">
+          <div class="step completed">
+            <div class="step-number">✓</div>
+            <div class="step-label">Owner Account</div>
+          </div>
+          <div class="step-line completed"></div>
+          <div class="step active">
+            <div class="step-number">2</div>
+            <div class="step-label">Shop Details</div>
+          </div>
+          <div class="step-line"></div>
+          <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-label">Verification</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======== ALERTS ======== -->
+      <div class="test-section">
+        <div class="test-label">8. Alerts</div>
+        <div style="display:flex;flex-direction:column;gap:1rem;max-width:600px;">
+          <div class="alert alert-info"><span class="alert-icon">ℹ️</span> <div>Your shop is currently <strong>Pending Verification</strong>. Admin will review within 24–48 hours.</div></div>
+          <div class="alert alert-success"><span class="alert-icon">✅</span> <div>Order placed successfully! You will receive a confirmation soon.</div></div>
+          <div class="alert alert-warning"><span class="alert-icon">⚠️</span> <div>This shop only delivers to <strong>Daffodil Smart City</strong> and <strong>Ashulia</strong> areas.</div></div>
+          <div class="alert alert-danger"><span class="alert-icon">❌</span> <div>Payment verification failed. Please contact the shop owner directly.</div></div>
+        </div>
+      </div>
+
+      <!-- ======== PRICE CALCULATOR ======== -->
+      <div class="test-section">
+        <div class="test-label">9. Price Calculator Card</div>
+        <div style="max-width:360px;">
+          <div class="price-calculator">
+            <div class="price-calculator-title">🧮 Order Summary</div>
+            <div class="price-line">
+              <span>B&amp;W Print (20 pages × 2 copies)</span>
+              <span class="amount">৳60.00</span>
+            </div>
+            <div class="price-line">
+              <span>Spiral Binding</span>
+              <span class="amount">৳30.00</span>
+            </div>
+            <div class="price-line">
+              <span>Home Delivery (Ashulia)</span>
+              <span class="amount">৳30.00</span>
+            </div>
+            <div class="price-line">
+              <span>Loyalty Discount (5%)</span>
+              <span class="amount discount-amount">−৳6.00</span>
+            </div>
+            <div class="price-line total">
+              <span>Total Payable</span>
+              <span class="amount">৳114.00</span>
+            </div>
+            <div style="margin-top:1rem;">
+              <div class="cod-badge" style="justify-content:center;width:100%;">💵 Pay on Delivery / Pickup</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======== POINTS DISPLAY ======== -->
+      <div class="test-section">
+        <div class="test-label">10. Loyalty Points Display</div>
+        <div style="max-width:360px;">
+          <div class="points-display">
+            <div class="points-label">My Bonus Points</div>
+            <div class="points-value">3,750</div>
+            <div class="points-label">at Smart Print Center</div>
+            <div class="points-progress">
+              <div class="points-progress-bar" style="width:75%;"></div>
+            </div>
+            <div style="display:flex;justify-content:space-between;margin-top:0.75rem;font-size:0.75rem;color:rgba(255,255,255,0.6);">
+              <span>1,250 more for 5% discount</span>
+              <span>75% → 5,000 pts</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======== TOAST TEST ======== -->
+      <div class="test-section">
+        <div class="test-label">11. Toast Notifications</div>
+        <div class="component-row">
+          <button class="btn btn-success btn-sm" onclick="CampusPrint.toast.success('Order Placed!', 'Your order has been sent to Smart Print Center.')">✅ Success Toast</button>
+          <button class="btn btn-danger btn-sm" onclick="CampusPrint.toast.error('Upload Failed', 'File size exceeds 20MB limit.')">❌ Error Toast</button>
+          <button class="btn btn-primary btn-sm" onclick="CampusPrint.toast.warning('COD Only', 'No online payment available.')">⚠️ Warning Toast</button>
+          <button class="btn btn-ghost btn-sm" onclick="CampusPrint.toast.info('Tip', 'Earn 1 point per ৳10 spent!')">ℹ️ Info Toast</button>
+        </div>
+      </div>
+
+      <!-- ======== FILTER CHIPS ======== -->
+      <div class="test-section">
+        <div class="test-label">12. Filter Bar</div>
+        <div class="filter-bar">
+          <button class="filter-chip active">All Shops</button>
+          <button class="filter-chip">🏆 Top Rated</button>
+          <button class="filter-chip">💰 Lowest Price</button>
+          <button class="filter-chip">⚡ Open Now</button>
+          <button class="filter-chip">🏠 Home Delivery</button>
+          <button class="filter-chip">🎨 Color Print</button>
+          <button class="filter-chip">📋 Binding</button>
+        </div>
+      </div>
+
+      <!-- ======== SEARCH BAR ======== -->
+      <div class="test-section">
+        <div class="test-label">13. Search Bar</div>
+        <div class="search-bar" style="max-width:500px;">
+          <input type="text" class="search-input" placeholder="Search printing shops..." />
+          <button class="search-btn">🔍 Find Shops</button>
+        </div>
+      </div>
+
+      <!-- ======== SECTION HEADER ======== -->
+      <div class="test-section section-bg" style="border-radius:1.5rem;padding:3rem 2rem;text-align:center;">
+        <div class="test-label" style="text-align:left;">14. Section Header Component</div>
+        <div class="section-header">
+          <div class="section-label">Featured Shops</div>
+          <h2>Top Printing Shops Near You</h2>
+          <p>Discover the best printing shops in the DIU–Ashulia area, compare prices, and place your order in minutes.</p>
+        </div>
+        <div class="component-row" style="justify-content:center;">
+          <button class="btn btn-primary">View All Shops</button>
+          <button class="btn btn-outline">Learn More</button>
+        </div>
+      </div>
+
+      <div style="height:4rem;"></div>
+    </div><!-- /.container -->
+  </main>
+
+  <!-- Footer -->
+  <div id="footer-placeholder"></div>
+
+  <!-- CampusPrint JS -->
+  <script src="js/components/navbar.js?v=20261121_2"></script>
+  <script src="js/components/footer.js"></script>
+
+  <!-- Filter chip interactivity demo -->
+  <script>
+    document.querySelectorAll('.filter-chip').forEach(chip => {
+      chip.addEventListener('click', function () {
+        this.closest('.filter-bar').querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>

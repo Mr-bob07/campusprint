@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Dashboard – CampusPrint</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../css/global.css" />
+  <link rel="stylesheet" href="../../css/components.css" />
+  <link rel="stylesheet" href="../../css/dashboard-customer.css" />
+</head>
+<body class="page-wrapper" style="background-color: var(--color-bg-light);">
+
+  <!-- Navbar Placeholder -->
+  <div id="navbar-placeholder"></div>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="dashboard-layout">
+
+      <!-- Left Sidebar -->
+      <aside class="sidebar">
+        <div class="sidebar-logo">
+          <div style="font-weight: 700; color: var(--color-primary); font-size: 0.95rem;">Student Portal</div>
+          <div style="font-size: 0.75rem; color: var(--color-text-muted);">CampusPrint DIU</div>
+        </div>
+
+        <div class="sidebar-section-label">Main Menu</div>
+        <a href="dashboard.html" class="sidebar-link active">
+          <span class="sidebar-link-icon">📊</span>
+          <span>Dashboard Overview</span>
+        </a>
+        <a href="place-order.html" class="sidebar-link">
+          <span class="sidebar-link-icon">🖨️</span>
+          <span>Place New Order</span>
+        </a>
+        <a href="track-order.html" class="sidebar-link">
+          <span class="sidebar-link-icon">📍</span>
+          <span>Track Active Order</span>
+          <span class="sidebar-link-badge">1</span>
+        </a>
+        <a href="my-orders.html" class="sidebar-link">
+          <span class="sidebar-link-icon">📦</span>
+          <span>My Orders History</span>
+        </a>
+        <a href="my-rewards.html" class="sidebar-link">
+          <span class="sidebar-link-icon">🎁</span>
+          <span>Bonus Points &amp; Rewards</span>
+        </a>
+        <a href="favorite-shops.html" class="sidebar-link">
+          <span class="sidebar-link-icon">❤️</span>
+          <span>Favorite Shops</span>
+        </a>
+
+        <div class="sidebar-section-label" style="margin-top: 1.5rem;">Account</div>
+        <a href="my-profile.html" class="sidebar-link">
+          <span class="sidebar-link-icon">👤</span>
+          <span>My Profile</span>
+        </a>
+        <button class="sidebar-link" onclick="CampusPrint.auth.logout()" style="width: 100%; text-align: left; background: none; border: none; cursor: pointer; color: var(--color-danger);">
+          <span class="sidebar-link-icon">🚪</span>
+          <span>Logout</span>
+        </button>
+      </aside>
+
+      <!-- Right Dashboard Content -->
+      <div class="dashboard-content">
+
+        <!-- Header Greeting -->
+        <div class="dashboard-header">
+          <div class="dashboard-user-greeting">
+            <h1 id="greetingName">Welcome, Tanzim!</h1>
+            <p>Daffodil International University • Ashulia Campus</p>
+          </div>
+          <a href="place-order.html" class="btn btn-primary btn-lg">
+            <span>🖨️</span> <span>New Print Order</span>
+          </a>
+        </div>
+
+        <!-- Metric Stat Cards -->
+        <div class="stats-grid-dashboard">
+          <div class="stat-card">
+            <div class="stat-card-icon blue">📦</div>
+            <div class="stat-card-value" id="statTotalOrders">3</div>
+            <div class="stat-card-label">Total Orders</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-icon yellow">⏳</div>
+            <div class="stat-card-value" id="statActiveOrders">1</div>
+            <div class="stat-card-label">Active / Ready Order</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-icon green">✅</div>
+            <div class="stat-card-value" id="statCompletedOrders">2</div>
+            <div class="stat-card-label">Completed Orders</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-icon purple">⭐</div>
+            <div class="stat-card-value" id="statLoyaltyPoints">50</div>
+            <div class="stat-card-label">Total Loyalty Points</div>
+          </div>
+        </div>
+
+        <!-- Active Order Timeline Quick Glance -->
+        <div class="dashboard-panel">
+          <div class="dashboard-panel-header">
+            <div class="dashboard-panel-title">
+              <span>🚀</span> Active Order Tracking: <strong id="activeOrderId" style="margin-left: 6px;">#CP-1049</strong>
+            </div>
+            <a href="track-order.html" class="btn btn-outline btn-sm">Full Tracking Details →</a>
+          </div>
+
+          <div style="background: var(--color-bg-light); border-radius: 12px; padding: 1.25rem;">
+            <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap: 8px; margin-bottom: 1rem;">
+              <div>
+                <strong>Shop:</strong> Smart Print Point • <strong>Doc:</strong> Algorithms_Lab_Report_04.pdf
+              </div>
+              <div>
+                <span class="status-badge status-ready">Ready for Pickup</span>
+                <span class="badge badge-warning">COD Unpaid (৳75.00)</span>
+              </div>
+            </div>
+
+            <!-- 5-step status progression -->
+            <div class="order-timeline">
+              <div class="timeline-step completed">
+                <div class="timeline-dot">✓</div>
+                <div class="timeline-title">Placed</div>
+              </div>
+              <div class="timeline-step completed">
+                <div class="timeline-dot">✓</div>
+                <div class="timeline-title">Accepted</div>
+              </div>
+              <div class="timeline-step completed">
+                <div class="timeline-dot">✓</div>
+                <div class="timeline-title">Printing</div>
+              </div>
+              <div class="timeline-step active">
+                <div class="timeline-dot">📦</div>
+                <div class="timeline-title">Ready</div>
+              </div>
+              <div class="timeline-step">
+                <div class="timeline-dot">5</div>
+                <div class="timeline-title">Received &amp; Paid</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Orders Table -->
+        <div class="dashboard-panel">
+          <div class="dashboard-panel-header">
+            <div class="dashboard-panel-title">
+              <span>📋</span> Recent Orders
+            </div>
+            <a href="my-orders.html" class="btn btn-ghost btn-sm">View All Orders</a>
+          </div>
+
+          <div class="table-wrapper">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Shop</th>
+                  <th>Document</th>
+                  <th>Total</th>
+                  <th>Payment</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="recentOrdersTableBody">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer Placeholder -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Scripts -->
+  <script src="../../js/data/orders.js"></script>
+  <script src="../../js/utils/auth.js"></script>
+  <script src="../../js/components/navbar.js?v=20261121_2"></script>
+  <script src="../../js/components/footer.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Ensure customer session
+      let session = CampusPrint.auth.getSession();
+      if (!session) {
+        // Auto-seed demo student session for preview
+        CampusPrint.auth.setSession({
+          id: 101,
+          name: "Tanzim Ahmed",
+          email: "student@diu.edu.bd",
+          role: "customer"
+        });
+        session = CampusPrint.auth.getSession();
+      }
+
+      const nameEl = document.getElementById('greetingName');
+      if (nameEl && session.name) {
+        nameEl.textContent = `Welcome, ${session.name}!`;
+      }
+
+      // Populate recent orders
+      const orders = (typeof window.CP_ORDERS !== 'undefined') ? window.CP_ORDERS : [];
+      const tbody = document.getElementById('recentOrdersTableBody');
+      if (tbody) {
+        tbody.innerHTML = orders.slice(0, 3).map(order => {
+          const statusClass = `status-${order.order_status}`;
+          const payBadge = order.payment_status === 'paid' 
+            ? `<span class="badge badge-success">Paid</span>` 
+            : `<span class="badge badge-warning">COD Unpaid</span>`;
+
+          return `
+            <tr>
+              <td><strong>#${order.id}</strong></td>
+              <td>${order.shop_name}</td>
+              <td style="max-width:200px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${order.document_name}</td>
+              <td><strong>৳${order.total_payable.toFixed(2)}</strong></td>
+              <td>${payBadge}</td>
+              <td><span class="status-badge ${statusClass}">${order.order_status.toUpperCase()}</span></td>
+              <td>
+                <a href="track-order.html?order_id=${order.id}" class="btn btn-outline btn-sm">Track</a>
+              </td>
+            </tr>
+          `;
+        }).join('');
+      }
+    });
+  </script>
+</body>
+</html>
